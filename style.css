@@ -1,0 +1,88 @@
+/* || STYLE RESET */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* || VARIABLES */
+:root {
+    --colorBlue: #0880D6;
+    --colorRed: #FF3838;
+    --colorLight: #FFFFFF;
+    --colorDark: #555555;
+    --colorBorder: #C4C4C4;
+    --contactListBg: #DDDDDD;
+
+}
+
+/* || GENERAL STYLE */
+body {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+}
+.container {
+    margin: 5px;
+}
+ul {
+    list-style: none;
+}
+
+/* Formulaire de contact */
+.titleHeader {
+    font-size: 20px;
+    font-weight: 700;
+    background-color: var(--colorBlue);
+    color: var(--colorLight);
+    padding: 20px 30px;
+    line-height: 30px;
+    margin-bottom: 15px;
+}
+.contactBox {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px /*Provisoire*/;
+}
+.form-contact {
+    border: 1px solid var(--colorBorder);
+}
+.form-contact h2 {
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    color: var(--colorLight);
+    background-color: var(--colorBlue);
+    padding-block: 12px;
+}
+.file-aaron {
+    padding: 45px, 77px, 45px, 77px;
+    border: 1px dashed var(--colorBorder);
+}
+.btn {
+    padding: 10px 45px;
+    color: var(--colorLight);
+    background-color: var(--colorBlue);
+    border: none;
+}
+.reset {
+    margin-left: 20px;
+    background-color: var(--colorRed);
+}
+
+/* liste des contacts */
+.listContact {
+    border: 1px solid var(--colorBorder);
+    padding: 15px /*Provisoire*/;
+}
+.listContact__title {
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    color: var(--colorLight);
+    background-color: var(--colorBlue);
+    padding-block: 12px;
+
+}
