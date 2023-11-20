@@ -30,6 +30,21 @@ ul {
     list-style: none;
 }
 
+/* Css anita */
+
+li label,li input{
+    display: block;
+    height: 45px;
+    border: 1px solid #C4C4C4;
+    color: var(--colorBlue);
+}
+input:invalid{
+    border: #FF3838;
+}
+
+
+
+
 /* Formulaire de contact */
 .titleHeader {
     font-size: 20px;
