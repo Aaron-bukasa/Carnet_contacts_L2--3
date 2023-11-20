@@ -37,8 +37,24 @@ h1, h2 {
 ul {
     list-style: none;
 }
+label {
+    display: block;
+    color: var(--colorBlue);
+}
+input {
+    width: 100%;
+    height: 45px;
+}
+textarea {
+    width: 100%;
+    height: 115px;
+}
+svg {
+    width: 12px;
+    height: 12px;
+}
 
-/* Formulaire de contact */
+/* HEADER */
 .titleHeader {
     text-align: left;
     padding: 20px 30px;
@@ -126,191 +142,3 @@ ul {
     font-weight: 400;
     line-height: 18px;
 }
-
-
-
-/* .contactBox {
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 0 70px 70px;
-}
-.form-contact {
-    width: 45rem;
-    height: 100vh;
-    border: 1px solid var(--colorBorder02);
-}
-ul { 
-    display: flex;
-    flex-direction: column;
-    gap: 11px;
-    padding: 14px;
-}
-.btns {
-    padding: 14px 14px 30px;
-}
-
-.listContact__content__profil {
-    display: flex;
-    text-align: left;
-}
-.listContact {
-    color: var(--colorDark);
-    border: 1px solid var(--colorBorder02);
-}
-.listContact__content__profil img {
-    display: none;
-}
-.nameAndBtns {
-    display: flex;
-    justify-content: space-between;
-}
-.profilBtn {
-    flex-direction: row;
-}
-.profilBtn button {
-    background-color: var(--colorBlue);
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 2rem;
-    margin-block: 0.2rem;
-    padding: 0.5rem;
-    border: none;  
-    border-radius: 5px;
-}
-.profilBtn button span {
-    display: none;
-}
-.profilBtn .profilBtn__delete {
-    background-color: var(--colorRed);
-}
-.profilBtn svg {
-    width: 10%;
-    height: 100%;
-    margin-right: 10px;
-    border: var(--colorRed);
-}
-.profilBtn svg path {
-    fill: var(--colorLight);
-} */
-
-/* HEADER */
-/* .titleHeader {
-    font-size: 20px;
-    font-weight: 700;
-    background-color: var(--colorBlue);
-    color: var(--colorLight);
-    padding: 20px 30px;
-    line-height: 30px;
-} */
-
-/* FORMULAIRE DES CONTACTS */
-/* .form-contact {
-    border: 1px solid var(--colorBorder);
-}
-.form-contact h2 {
-    font-size: 20px;
-    font-weight: 700;
-    text-align: center;
-    color: var(--colorLight);
-    background-color: var(--colorBlue);
-    padding-block: 12px;
-}
-.file label { */
-    /* padding: 45px, 77px, 45px, 77px;
-    border: 1px dashed var(--colorBorder);
- */
- /* display: flex;
- justify-content: center;
- align-items: center;
- height: 5rem;
- width: 100%;
- border: 2px dashed var(--colorBorder01);
-} */
-/* #file {
-    width: auto;
-}
-.btns input {
-    width: auto;
-    padding: 10px 45px;
-    color: var(--colorLight);
-    background-color: var(--colorBlue);
-    border: none;
-}
-.btns .btn__reset {
-    margin-left: 20px;
-    background-color: var(--colorRed);
-} */
-
-/* liste des contacts */
-/* .listContact {
-    color: var(--colorDark);
-    border: 1px solid var(--colorBorder02);
-}
-.listContact__title {
-    font-size: 20px;
-    font-weight: 700;
-    text-align: center;
-    color: var(--colorLight);
-    background-color: var(--colorBlue);
-    padding-block: 12px;
-}
-.listContact__content__profil {
-    text-align: center;
-    padding: 20px;
-    border-bottom: 1px solid var(--colorBorder01);
-}
-.listContact__content__profil img {
-    width: 30vw;
-    height: 30vw;
-    border-radius: 50%;
-}
-.profil__description p {
-    font-size: 12px;
-    padding-top: 14px;
-}
-.profil__description .p-tel {
-    font-size: 14px;
-}
-.profilBtn {
-   display: flex;
-   flex-direction: column;
-}
-.profilBtn button {
-    font-weight: 600;
-    color: var(--colorLight);
-    background-color: var(--colorBlue);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 2rem;
-    margin-block: 0.2rem;
-    padding: 0.5rem;
-    border: none;  
-    border-radius: 5px;
-}
-.profilBtn .profilBtn__delete {
-    background-color: var(--colorRed);
-}
-.profilBtn svg {
-    width: 10%;
-    height: 100%;
-    margin-right: 10px;
-    border: var(--colorRed);
-}
-.profilBtn svg path {
-    fill: var(--colorLight);
-} */
-
-/* RESPONSIVE */
-/*
-@media screen and (min-width: 481px) {
-    .nameAndBtns {
-        width: 100%
-    }
-    .profilBtn {
-        display: flex;
-        gap: 14px;
-    } 
-} */
