@@ -37,24 +37,8 @@ h1, h2 {
 ul {
     list-style: none;
 }
-label {
-    display: block;
-    color: var(--colorBlue);
-}
-input {
-    width: 100%;
-    height: 45px;
-}
-textarea {
-    width: 100%;
-    height: 115px;
-}
-svg {
-    width: 12px;
-    height: 12px;
-}
 
-/* HEADER */
+/* Formulaire de contact */
 .titleHeader {
     text-align: left;
     padding: 20px 30px;
