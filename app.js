@@ -20,16 +20,14 @@ btnRenit = document.querySelector('.btn__reset');
 // Variables sur la liste des contacts
 let divContactList = document.querySelector('.listContact__content');
 const figureTemplate = document.querySelector('#figure__template');
-// let body = document.querySelector('body');
 
 
 // Events
-// formContact.addEventListener('keypress', (e) => e.preventDefault());
 btnCreer.addEventListener('click', addContact);
-// window.addEventListener('load', () => {
-//     contactList = JSON.parse(localStorage.getItem("tab"));
-//     viewContacts()
-// })
+window.addEventListener('load', () => {
+    contactList = JSON.parse(localStorage.getItem("tab"));
+    viewContacts(contactList)
+})
 btnRenit.addEventListener('click', formReset);
 
 
@@ -64,9 +62,9 @@ function addContact(e) {
         "file": file.value
     }
     contactList.push(newContact);
-    // localStorage.setItem("tab", JSON.stringify(contactList));
+    localStorage.setItem("tab", JSON.stringify(contactList));
     formReset();
-    viewContacts();
+    viewContacts(contactList);
 }
 
 // la fonction qui supprime le contact
@@ -80,27 +78,28 @@ function completedContact() {
 }
 
 // La fonction qui imprime chaque contact du tableau sur le DOM
-function viewContacts() {
-    for(let contact of contactList) {
+function viewContacts(tab) {
+    for(let contact of tab) {
         let figureContent = figureTemplate.content.cloneNode(true);
         divContactList.append(figureContent);
 
+        // document.querySelector('.profil__image').setAttribute('src', file.value);
         document.querySelector('.f-names').textContent = `${contact.prenom} ${contact.nom} - ${contact.groupe}`;
         document.querySelector('.f-tel').textContent = `${contact.tel}`;
         document.querySelector('.f-bio').textContent = `${contact.bio}`;
 
         let figure = document.querySelector('.listContact__content figure');
-        figure.addEventListener('click', (e) => {
-            const containerElement = e;
-            const clickElement = e.target.tagName;
-            console.log(clickElement);
-            if(clickElement == 'svg' && clickElement.parentElement.classList == 'profilBtn__completed') {
-                console.log('coucou');
-            }
-            if(clickElement == 'svg' && clickElement.parentElement.classList == 'profilBtn__delete') {
-                console.log('delete');
-            }
+        // figure.addEventListener('click', (e) => {
+        //     const containerElement = e;
+        //     const clickElement = e.target.tagName;
+        //     console.log(clickElement);
+        //     if(clickElement == 'svg' && clickElement.parentElement.classList == 'profilBtn__completed') {
+        //         console.log('coucou');
+        //     }
+        //     if(clickElement == 'svg' && clickElement.parentElement.classList == 'profilBtn__delete') {
+        //         console.log('delete');
+        //     }
             
-        })
+        // })
     }
 }
