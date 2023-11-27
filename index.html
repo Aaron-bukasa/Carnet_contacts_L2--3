@@ -16,40 +16,43 @@
         <div class="boxContact">
             <form class="formContact" action="">
                 <h2>Formulaire de contact</h2>
-                <ul>
-                    <li class="prenom">
-                        <label for="prenom">Prénom</label>
-                        <input type="text"  id="prenom">
-                    </li>
-                    <li class="nom">
-                        <label for="nom">Nom</label>
-                        <input type="text"  id="nom">
-                    </li>
-                    <li class="tel">
-                        <label for="phone">Télephone</label>
-                        <input type="tel" id="phone">
-                    </li>
-                    <li class="groupe">
-                        <label for="groupe">Groupe</label>
-                        <input type="text" id="groupe">
-                    </li>
-                    <li class="email">
-                        <label for="email">Email</label>
-                        <input type="email" id="email">
-                    </li>
-                    <li class="bio">
-                        <label for="bio">Bio</label>
-                        <textarea name="bio" id="bio"></textarea>
-                    </li>
-                    <li class="file">
-                        <label for="file">
-                            <input type="file" id="file" >
-                        </label>
-                    </li>
-                </ul>
-                <div class="btns">
-                    <input class="btn__submit" type="submit" value="Créer">
-                    <input class="btn__reset" type="reset" value="Rénit">
+                <div>
+                    <ul>
+                        <li class="prenom">
+                            <label for="prenom">Prénom</label>
+                            <input type="text" id="prenom" name="prenom" >
+                        </li>
+                        <li class="nom">
+                            <label for="nom">Nom</label>
+                            <input type="text" id="nom" name="nom">
+                        </li>
+                        <li class="tel">
+                            <label for="tel">Télephone</label>
+                            <input type="tel" id="tel" name="tel">
+                        </li>
+                        <li class="groupe">
+                            <label for="groupe">Groupe</label>
+                            <input type="text" id="groupe" name="groupe">
+                        </li>
+                        <li class="email">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email">
+                        </li>
+                        <li class="bio">
+                            <label for="bio">Bio</label>
+                            <textarea id="bio" name="bio"></textarea>
+                        </li>
+                        <li class="file">
+                            <label for="file">
+                                Déposer la photo<br />ici
+                                <input type="file" id="file" name="file" alt="Déposer la photo">
+                            </label>
+                        </li>
+                    </ul>
+                    <div class="btns">
+                        <input class="btn__submit" type="submit" value="Créer">
+                        <input class="btn__reset" type="button" value="Réinit">
+                    </div>
                 </div>
             </form>
             <div class="listContact">
@@ -57,42 +60,42 @@
                     Liste des contacts
                 </h2>
                 <div class="listContact__content">
-                    <figure class="listContact__content__profil">
-                        <img class="profil__image" src="#" alt="photo profil" width="285" height="285">
-                        <figcaption class="profil__description">
-                            <div class="nameAndBtns">
-                                <p>Prénom Nom - Groupe</p>
-                                <div class="profilBtn">
-                                    <button class="profilBtn__completed">
-                                        <svg width="800" height="800" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M7.11009 7.38073C6.42965 7.38073 5.76449 7.17896 5.19873 6.80093C4.63296 6.4229 4.192 5.88558 3.93161 5.25694C3.67121 4.62829 3.60308 3.93655 3.73583 3.26919C3.86858 2.60182 4.19624 1.98881 4.67738 1.50766C5.15853 1.02652 5.77154 0.698855 6.43891 0.566107C7.10627 0.43336 7.79802 0.501491 8.42666 0.761884C9.05531 1.02228 9.59262 1.46324 9.97065 2.029C10.3487 2.59477 10.5505 3.25993 10.5505 3.94037C10.548 4.85207 10.1848 5.72573 9.54012 6.3704C8.89545 7.01507 8.02179 7.37831 7.11009 7.38073ZM7.11009 1.87615C6.70183 1.87615 6.30273 1.99721 5.96327 2.22403C5.62381 2.45085 5.35924 2.77324 5.203 3.15043C5.04676 3.52761 5.00589 3.94266 5.08553 4.34308C5.16518 4.7435 5.36178 5.11131 5.65047 5.39999C5.93915 5.68868 6.30696 5.88528 6.70738 5.96492C7.1078 6.04457 7.52285 6.00369 7.90003 5.84746C8.27722 5.69122 8.59961 5.42665 8.82643 5.08719C9.05324 4.74773 9.17431 4.34863 9.17431 3.94037C9.17431 3.3929 8.95683 2.86786 8.56971 2.48074C8.1826 2.09363 7.65756 1.87615 7.11009 1.87615ZM0.688073 13.8028C0.505585 13.8028 0.330571 13.7303 0.201532 13.6012C0.0724933 13.4722 0 13.2972 0 13.1147C0 8.75688 4.98165 8.75688 7.11009 8.75688C7.77064 8.75688 8.3578 8.75688 8.88991 8.8211C9.07091 8.83518 9.239 8.92023 9.35758 9.0577C9.47615 9.19518 9.53558 9.37394 9.52293 9.55505C9.50657 9.73683 9.41958 9.90495 9.28064 10.0233C9.1417 10.1417 8.96189 10.2008 8.77981 10.1881C8.2844 10.1881 7.73394 10.133 7.11009 10.133C2.3578 10.133 1.37615 11.3257 1.37615 13.1147C1.37738 13.2054 1.36043 13.2954 1.32628 13.3794C1.29214 13.4635 1.24151 13.5398 1.17736 13.604C1.11322 13.6681 1.03688 13.7188 0.952841 13.7529C0.868802 13.787 0.778774 13.804 0.688073 13.8028ZM9.04587 14.5C8.86344 14.4998 8.68855 14.4272 8.55963 14.2982C8.48718 14.2291 8.43137 14.1445 8.3964 14.0508C8.36144 13.957 8.34824 13.8565 8.3578 13.7569L8.50459 11.9954C8.51592 11.8335 8.58417 11.6807 8.69725 11.5642L13.7615 6.5C14.1109 6.17631 14.5696 5.99648 15.0459 5.99648C15.5222 5.99648 15.9809 6.17631 16.3303 6.5C16.5025 6.67363 16.6384 6.87994 16.7297 7.10682C16.8211 7.33369 16.8662 7.57655 16.8624 7.8211C16.866 8.04652 16.8248 8.27042 16.7414 8.47985C16.6579 8.68929 16.5338 8.88011 16.3761 9.04129L11.3119 14.1055C11.1996 14.2207 11.05 14.2922 10.8899 14.3073L9.11009 14.4725L9.04587 14.5ZM9.85321 12.3532L9.79816 13.0505L10.5138 12.9862L15.4037 8.09633C15.4614 8.02711 15.4909 7.93865 15.4862 7.84863C15.4859 7.7209 15.4404 7.59742 15.3578 7.5C15.2676 7.43298 15.1582 7.39678 15.0459 7.39678C14.9335 7.39678 14.8241 7.43298 14.7339 7.5L9.85321 12.3532Z" fill="#555555"/>
-                                        </svg>
-                                        <span>
-                                            Modifier le contact
-                                        </span>
-                                    </button>
-                                    <button class="profilBtn__delete">
-                                        <svg width="800" height="800" viewBox="0 0 12 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M11.1791 12.2895C11.1791 12.8757 10.9462 13.438 10.5316 13.8526C10.1171 14.2671 9.55481 14.5 8.96854 14.5H3.81065C3.22438 14.5 2.66213 14.2671 2.24757 13.8526C1.83302 13.438 1.60012 12.8757 1.60012 12.2895V3.44737H0.863281V1.23684H4.17907L4.91591 0.5H7.86328L8.60012 1.23684H11.9159V3.44737H11.1791V12.2895ZM2.33697 3.44737V12.2895C2.33697 12.6803 2.49223 13.0552 2.7686 13.3315C3.04497 13.6079 3.4198 13.7632 3.81065 13.7632H8.96854C9.35939 13.7632 9.73423 13.6079 10.0106 13.3315C10.287 13.0552 10.4422 12.6803 10.4422 12.2895V3.44737H2.33697ZM11.1791 2.71053V1.97368H8.2317L7.49486 1.23684H5.28433L4.54749 1.97368H1.60012V2.71053H11.1791ZM3.81065 4.92105H4.54749V12.2895H3.81065V4.92105ZM8.2317 4.92105H8.96854V12.2895H8.2317V4.92105Z" fill="#FF3838"/>
-                                        </svg>
-                                        <span>
-                                            Supprimer le contact
-                                        </span>
-                                    </button>
-                                </div>
-                            </div>
-                            <p class="p-tel">
-                                +243 974 868 993
-                            </p>
-                            <p>
-                                What is Lorem Ipsum ?<br />Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                            </p>
-                        </figcaption>
-                    </figure>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- TEMPLATE-FIGURE -->
+    <template id="figure__template">
+        <figure class="contact__profil">
+            <img class="profil__image" src="img/Aaron_bukasa.jpg" alt="photo profil">
+            <figcaption class="profil__description">
+                <div class="nameAndBtns">
+                    <p class="f-names">Prénom Nom - Groupe</p>
+                    <div class="profilBtn">
+                        <button>
+                            <img src="./img/edit.svg" class="profilBtn__completed" alt="editer le contact">
+                            <span>
+                                Modifier le contact
+                            </span>
+                        </button>
+                        <button>
+                            <img src="./img/delete.svg" class="profilBtn__delete" alt="contact delete">
+                            <span>
+                                Supprimer le contact
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                <p class="f-tel">
+                    Télephone
+                </p>
+                <p class="f-bio">
+                    What is Lorem Ipsum ?<br />Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                </p>
+            </figcaption>
+        </figure>
+    </template>
 
 </body>
 </html>

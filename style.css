@@ -34,24 +34,17 @@ h1, h2 {
     background-color: var(--colorBlue);
     padding-block: 12px;
 }
-ul {
-    list-style: none;
-}
 label {
     display: block;
     color: var(--colorBlue);
 }
 input {
     width: 100%;
-    height: 45px;
+    height: 40px;
 }
 textarea {
     width: 100%;
-    height: 115px;
-}
-svg {
-    width: 12px;
-    height: 12px;
+    height: 100px;
 }
 
 /* HEADER */
@@ -62,38 +55,47 @@ svg {
 .boxContact {
     display: flex;
     column-gap: 15px;
-    padding: 14px 5.3rem 5.3rem;
+    margin: 14px 5rem 0;
 }
 
 /* FORMULAIRE DE CONTACT*/
 .formContact {
     width: 40rem;
     border: 1px solid var(--colorBorder01);
-    padding-bottom: 61px;
 }
 .formContact h2 {
     text-align: center;
     padding-block: 12px;
 }
+.formContact > div {
+    padding: 14px 21px 41px 21px;
+}
 .formContact ul {
+    list-style: none;
     display: flex;
     flex-direction: column;
-    row-gap: 11px;
-    padding: 14px 21px 0;
+    row-gap: 20px;
+
 }
 .file label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    padding: 45px 77px;
-    border: 1px dashed var(--colorBorder01);
+    color: var(--colorDark);
+    width: 100%;
+    height: 105px; 
+    border: 2px dashed var(--colorBorder01);
 }
-.file input {
-    width: 144px;
+#file {
+    width: auto;
+    display: none;
 }
 .formContact .btns {
     display: flex;
+    justify-content: flex-start;
     column-gap: 36px;
-    padding: 14px 21px 0;
-    margin-top: 5px;
+    margin-top: 20px;
 }
 .btn__submit, .btn__reset {
     color: var(--colorLight);
@@ -110,24 +112,41 @@ svg {
 .listContact {
     height: min-content;
     border: 1px solid var(--colorBorder02);
+    border-bottom: none;
 }
-.listContact__content {
-    padding: 20px;
-    border-bottom: 1px solid var(--colorBorder01);
-}
-.listContact__content__profil {
+.contact__profil {
     display: flex;
+    align-items: center;
     column-gap: 52px;
+    padding: 20px;
+    border-bottom: 1px solid var(--colorBorder02);
 }
-/* .listContact__content__profil img {
-
-} */
-.profil__description {
-    
+.profil__image {
+    flex-shrink: 0;
+    width: calc(200px);
+    height: calc(200px);
+    border-radius: 50%;
 }
 .nameAndBtns {
     display: flex;
     justify-content: space-between;
+}
+.profilBtn button {
+    margin-left: 10px;
+    padding: 8px;
+    border: none;
+    position: relative;
+    background-color: transparent;
+    
+}
+.profilBtn img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+   
 }
 .profilBtn span {
     display: none;
@@ -137,8 +156,19 @@ svg {
     font-weight: 400;
     line-height: 21px;
 }
-.p-tel {
+.f-tel {
     font-size: 14px;
     font-weight: 400;
     line-height: 18px;
 }
+/* @media screen and (min-width: 481px) {
+    
+}
+@media screen and (min-width: 768px) {998
+
+}
+@media screen and (min-width: 1024px) {
+    
+} */
+
+/* VALIDATION*/
