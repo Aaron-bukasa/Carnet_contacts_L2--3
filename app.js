@@ -60,30 +60,7 @@ function validation(input) {
             idInput.style.borderColor = '';
         }
     }
-    /*
-    let regexEmail = (input) => {
-        let regex = /^[\w]{3,25}@[\w]{3,10}\.[a-z]{2,5}$/;        
-        if(!regex.test(input.value)) {
-            paramBorder(input);
-            p.textContent = "Veillez renseigner une adresse email valide";
-            return;
-        }
-        /*else if(contactList.forEach(x => x.email == input.value)) {
-            paramBorder(input);
-            p.textContent = "Email existe déjà";
-            return;
-        }
-        for(contact of contactList) {
-            if(input.value == contact.email) {
-                paramBorder(input);
-                p.textContent = "Email existe déjà";
-                return;
-            }
-        }
-        .remove();
-        
-    }*/
-
+   
     if(input.id == "nom") {
         charactLength(input, 3, 50)
 
@@ -92,10 +69,7 @@ function validation(input) {
     } else if(input.id == 'email') {
         regexEmail(input);
     } else if(input.id == "tel") {
-        // let regex3 = /^[084|085|080|089|081|082|099|097|090]/;
-        // let regex2 = input.length == 10;
-        // let regex1 = !isNaN(input.value)
-        // let regex4 = input.value !== contact.tel
+        
     } else if(input.id == 'file') {
        
     }
