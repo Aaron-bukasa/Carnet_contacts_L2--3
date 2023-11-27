@@ -16,40 +16,43 @@
         <div class="boxContact">
             <form class="formContact" action="">
                 <h2>Formulaire de contact</h2>
-                <ul>
-                    <li class="prenom">
-                        <label for="prenom">Prénom</label>
-                        <input type="text" id="prenom" >
-                    </li>
-                    <li class="nom">
-                        <label for="nom">Nom</label>
-                        <input type="text" id="nom">
-                    </li>
-                    <li class="tel">
-                        <label for="tel">Télephone</label>
-                        <input type="tel" id="tel">
-                    </li>
-                    <li class="groupe">
-                        <label for="groupe">Groupe</label>
-                        <input type="text" id="groupe">
-                    </li>
-                    <li class="email">
-                        <label for="email">Email</label>
-                        <input type="email" id="email">
-                    </li>
-                    <li class="bio">
-                        <label for="bio">Bio</label>
-                        <textarea id="bio"></textarea>
-                    </li>
-                    <li class="file">
-                        <label for="file">
-                            <button type="file" id="file">Déposer la photo<br />ici</button>
-                        </label>
-                    </li>
-                </ul>
-                <div class="btns">
-                    <input class="btn__submit" type="submit" value="Créer">
-                    <input class="btn__reset" type="button" value="Réinit">
+                <div>
+                    <ul>
+                        <li class="prenom">
+                            <label for="prenom">Prénom</label>
+                            <input type="text" id="prenom" name="prenom" >
+                        </li>
+                        <li class="nom">
+                            <label for="nom">Nom</label>
+                            <input type="text" id="nom" name="nom">
+                        </li>
+                        <li class="tel">
+                            <label for="tel">Télephone</label>
+                            <input type="tel" id="tel" name="tel">
+                        </li>
+                        <li class="groupe">
+                            <label for="groupe">Groupe</label>
+                            <input type="text" id="groupe" name="groupe">
+                        </li>
+                        <li class="email">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email">
+                        </li>
+                        <li class="bio">
+                            <label for="bio">Bio</label>
+                            <textarea id="bio" name="bio"></textarea>
+                        </li>
+                        <li class="file">
+                            <label for="file">
+                                Déposer la photo<br />ici
+                                <input type="file" id="file" name="file" alt="Déposer la photo">
+                            </label>
+                        </li>
+                    </ul>
+                    <div class="btns">
+                        <input class="btn__submit" type="submit" value="Créer">
+                        <input class="btn__reset" type="button" value="Réinit">
+                    </div>
                 </div>
             </form>
             <div class="listContact">
@@ -57,7 +60,6 @@
                     Liste des contacts
                 </h2>
                 <div class="listContact__content">
-                    
                 </div>
             </div>
         </div>
@@ -65,20 +67,20 @@
 
     <!-- TEMPLATE-FIGURE -->
     <template id="figure__template">
-        <figure class="listContact__content__profil">
-            <img class="profil__image" src="./img/Aaron_bukasa.jpg" alt="photo profil" width="285" height="285">
+        <figure class="contact__profil">
+            <img class="profil__image" src="img/Aaron_bukasa.jpg" alt="photo profil">
             <figcaption class="profil__description">
                 <div class="nameAndBtns">
                     <p class="f-names">Prénom Nom - Groupe</p>
                     <div class="profilBtn">
-                        <button class="profilBtn__completed">
-                            <img src="./img/edit.svg" alt="editer le contact">
+                        <button>
+                            <img src="./img/edit.svg" class="profilBtn__completed" alt="editer le contact">
                             <span>
                                 Modifier le contact
                             </span>
                         </button>
-                        <button class="profilBtn__delete">
-                            <img src="./img/delete.svg" alt="contact delete">
+                        <button>
+                            <img src="./img/delete.svg" class="profilBtn__delete" alt="contact delete">
                             <span>
                                 Supprimer le contact
                             </span>

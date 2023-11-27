@@ -25,7 +25,6 @@ body {
 #container {
     color: var(--colorDark);
     margin: 0 auto;
-    /* padding-bottom: 85px; */
 }
 h1, h2 {
     font-size: 20px;
@@ -35,20 +34,17 @@ h1, h2 {
     background-color: var(--colorBlue);
     padding-block: 12px;
 }
-ul {
-    list-style: none;
-}
 label {
     display: block;
     color: var(--colorBlue);
 }
 input {
-    width: 518px;
-    height: 45px;
+    width: 100%;
+    height: 40px;
 }
 textarea {
-    width: 518px;
-    height: 115px;
+    width: 100%;
+    height: 100px;
 }
 
 /* HEADER */
@@ -59,45 +55,47 @@ textarea {
 .boxContact {
     display: flex;
     column-gap: 15px;
-    padding: 14px 21px 61px;
+    margin: 14px 5rem 0;
 }
 
 /* FORMULAIRE DE CONTACT*/
 .formContact {
     width: 40rem;
     border: 1px solid var(--colorBorder01);
-    padding-bottom: 61px;
 }
 .formContact h2 {
     text-align: center;
     padding-block: 12px;
 }
+.formContact > div {
+    padding: 14px 21px 41px 21px;
+}
 .formContact ul {
+    list-style: none;
     display: flex;
     flex-direction: column;
-    row-gap: 11px;
-    padding: 14px 21px 0;
+    row-gap: 20px;
+
 }
-/* .file label {
+.file label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    padding: 45px 77px;
-    border: 1px dashed var(--colorBorder01);
-} */
-.file {
-    width: 518px; 
-    border: 1px dashed var(--colorBorder01)
-}
-.file button {
+    color: var(--colorDark);
     width: 100%;
-    padding: 45px 77px;
-    border: none;
-    background-color: transparent;
+    height: 105px; 
+    border: 2px dashed var(--colorBorder01);
+}
+#file {
+    width: auto;
+    display: none;
 }
 .formContact .btns {
     display: flex;
+    justify-content: flex-start;
     column-gap: 36px;
-    padding: 14px 21px 0;
-    margin-top: 5px;
+    margin-top: 20px;
 }
 .btn__submit, .btn__reset {
     color: var(--colorLight);
@@ -114,15 +112,14 @@ textarea {
 .listContact {
     height: min-content;
     border: 1px solid var(--colorBorder02);
+    border-bottom: none;
 }
-.listContact__content {
-    padding: 20px;
-    border-bottom: 1px solid var(--colorBorder01);
-}
-.listContact__content__profil {
+.contact__profil {
     display: flex;
+    align-items: center;
     column-gap: 52px;
-    height: max-content;
+    padding: 20px;
+    border-bottom: 1px solid var(--colorBorder02);
 }
 .profil__image {
     flex-shrink: 0;
@@ -135,8 +132,8 @@ textarea {
     justify-content: space-between;
 }
 .profilBtn button {
-    width: 28px;
-    height: 28px;
+    margin-left: 10px;
+    padding: 8px;
     border: none;
     position: relative;
     background-color: transparent;
@@ -145,11 +142,11 @@ textarea {
 .profilBtn img {
     position: absolute;
     top: 0;
-    bottom: 0;
     left: 0;
-    right: 0;
     width: 100%;
     height: 100%;
+    cursor: pointer;
+   
 }
 .profilBtn span {
     display: none;
@@ -164,3 +161,14 @@ textarea {
     font-weight: 400;
     line-height: 18px;
 }
+/* @media screen and (min-width: 481px) {
+    
+}
+@media screen and (min-width: 768px) {998
+
+}
+@media screen and (min-width: 1024px) {
+    
+} */
+
+/* VALIDATION*/

@@ -4,7 +4,7 @@ let contactList = [];
 // General variables
 
 // Variables des formulaires
-let prenom, nom, tel, groupe, email, bio, file, formContact, btnCreer, btnRenit;
+let prenom, nom, tel, groupe, email, bio, file, btnCreer, btnRenit, inputForm;
 
 prenom = document.querySelector('#prenom');
 nom = document.querySelector('#nom');
@@ -13,30 +13,94 @@ groupe = document.querySelector('#groupe');
 email = document.querySelector('#email');
 bio = document.querySelector('#bio');
 file = document.querySelector('#file');
-formContact = document.querySelector('.formContact');
 btnCreer = document.querySelector('.btn__submit');
 btnRenit = document.querySelector('.btn__reset');
+inputForm = document.querySelectorAll('.formContact ul input');
 
 // Variables sur la liste des contacts
 let divContactList = document.querySelector('.listContact__content');
-const figureTemplate = document.querySelector('#figure__template');
-// let body = document.querySelector('body');
-
 
 // Events
-// formContact.addEventListener('keypress', (e) => e.preventDefault());
-btnCreer.addEventListener('click', addContact);
-// window.addEventListener('load', () => {
-//     contactList = JSON.parse(localStorage.getItem("tab"));
-//     viewContacts()
-// })
+btnCreer.addEventListener('click', (e) => {
+    e.preventDefault();
+    addContact();
+});
+// document.body.onload = function() {
+//     contactList = JSON.parse(localStorage.getItem('contacts'));
+//     viewContacts(contactList)
+// }
 btnRenit.addEventListener('click', formReset);
+inputForm.forEach((element) => {
+    element.addEventListener('blur', () => {
+        validation(element);
+    })
+})
 
 
 /* LES VALIDATIONS */
+function validation(input) {
+    let p;
+    let paramBorder = (input) => {
+        p = document.createElement('p');
+        input.style.borderColor = 'red';
+        p.style.color = 'red';
+        input.insertAdjacentElement('afterend', p);
+    }
 
+    let charactLength = (idInput, x, y) => {
+        if(idInput.value.length < x) {
+            paramBorder(idInput);
+            p.textContent = `Veillez renseigner un ${input.id} avec plus de ${x} caractères`;
+            return;
+        } else if(idInput.value.length > y) {
+            paramBorder(idInput);
+            p.textContent = `Veillez renseigner un ${idInput.id} avec moins de ${y} caractères`;
+            return;
+        } else {
+            idInput.style.borderColor = '';
+        }
+    }
+    /*
+    let regexEmail = (input) => {
+        let regex = /^[\w]{3,25}@[\w]{3,10}\.[a-z]{2,5}$/;        
+        if(!regex.test(input.value)) {
+            paramBorder(input);
+            p.textContent = "Veillez renseigner une adresse email valide";
+            return;
+        }
+        /*else if(contactList.forEach(x => x.email == input.value)) {
+            paramBorder(input);
+            p.textContent = "Email existe déjà";
+            return;
+        }
+        for(contact of contactList) {
+            if(input.value == contact.email) {
+                paramBorder(input);
+                p.textContent = "Email existe déjà";
+                return;
+            }
+        }
+        .remove();
+        
+    }*/
 
+    if(input.id == "nom") {
+        charactLength(input, 3, 50)
 
+    } else if(input.id == 'prenom') {
+        charactLength(input, 3, 50)
+    } else if(input.id == 'email') {
+        regexEmail(input);
+    } else if(input.id == "tel") {
+        // let regex3 = /^[084|085|080|089|081|082|099|097|090]/;
+        // let regex2 = input.length == 10;
+        // let regex1 = !isNaN(input.value)
+        // let regex4 = input.value !== contact.tel
+    } else if(input.id == 'file') {
+       
+    }
+    
+};
 
 /* FONCTIONS */
 
@@ -52,8 +116,7 @@ function formReset() {
 }
 
 // La fonction qui ajoute le contact dans le tableau des contacts
-function addContact(e) {
-    e.preventDefault();
+function addContact() {
     const newContact = {
         "prenom": prenom.value,
         "nom": nom.value,
@@ -64,43 +127,78 @@ function addContact(e) {
         "file": file.value
     }
     contactList.push(newContact);
-    // localStorage.setItem("tab", JSON.stringify(contactList));
+    // localStorage.setItem('contacts', JSON.stringify(contactList));
+    viewContacts(contactList);
     formReset();
-    viewContacts();
 }
 
 // la fonction qui supprime le contact
-function deleteContact() {
-
+function deleteContact(contactElement, position) {
+    contactList.splice(position, 1);
+    let contact = contactElement.closest(".contact__profil");
+    contact.remove();
 }
 
 // la fonction qui modifie le contact
-function completedContact() {
+function completedContact(contactElement, position) {
+    let contact = contactList[position];
+
+    prenom.value = contact.prenom;
+    nom.value = contact.nom;
+    tel.value = contact.tel;
+    groupe.value = contact.groupe;
+    email.value =contact.email;
+    bio.value = contact.bio;
+    file.value = contact.file;
+
+    btnCreer.value = "Modifier";
+    btnRenit.value = "Annuler";
+
+    btnCreer.addEventListener('click', () => {
+        deleteContact(contactElement, position);
+        btnCreer.value = "Créer";
+        btnRenit.value = "Réinit";
+    })
+    btnRenit.addEventListener('click', () => {
+        prenom.value = '';
+        nom.value = '';
+        tel.value = '';
+        groupe.value = '';
+        email.value = '';
+        bio.value = '';
+        file.value = '';
+        btnCreer.value = "Créer";
+        btnRenit.value = "Réinit";
+    })
 
 }
 
-// La fonction qui imprime chaque contact du tableau sur le DOM
-function viewContacts() {
-    for(let contact of contactList) {
-        let figureContent = figureTemplate.content.cloneNode(true);
-        divContactList.append(figureContent);
+// La fonction qui affiche chaque contact du tableau sur le DOM
+function viewContacts(tab) {
+    let figureTemplate = document.querySelector('#figure__template');
+    for(let i = 0; i < tab.length; i++) {
+        if(i == tab.length-1) {
+            let index = i;
+            let figureContent = figureTemplate.content.cloneNode(true);
 
-        document.querySelector('.f-names').textContent = `${contact.prenom} ${contact.nom} - ${contact.groupe}`;
-        document.querySelector('.f-tel').textContent = `${contact.tel}`;
-        document.querySelector('.f-bio').textContent = `${contact.bio}`;
+            // figureContent.querySelector('.profil__image').setAttribute('src', file.value);
+            figureContent.querySelector('.f-names').textContent = `${tab[i].prenom} ${tab[i].nom} - ${tab[i].groupe}`;
+            figureContent.querySelector('.f-tel').textContent = `${tab[i].tel}`;
+            figureContent.querySelector('.f-bio').textContent = `${tab[i].bio}`;
 
-        let figure = document.querySelector('.listContact__content figure');
-        figure.addEventListener('click', (e) => {
-            const containerElement = e;
-            const clickElement = e.target.tagName;
-            console.log(clickElement);
-            if(clickElement == 'svg' && clickElement.parentElement.classList == 'profilBtn__completed') {
-                console.log('coucou');
-            }
-            if(clickElement == 'svg' && clickElement.parentElement.classList == 'profilBtn__delete') {
-                console.log('delete');
-            }
-            
-        })
-    }
+            figureContent.querySelector('.contact__profil').addEventListener('click', (e) => {
+                const clickElement = e.target;
+                if((clickElement.tagName == 'IMG') && (clickElement.className == 'profilBtn__completed')) {
+                    completedContact(clickElement, index);
+                }
+                if((clickElement.tagName == 'IMG') && (clickElement.className == 'profilBtn__delete')) {
+                    if(confirm("Voullez-vous vraiment supprimer le contact ?")) {
+                        deleteContact(clickElement, index);
+                    }
+                }
+            });
+
+            divContactList.append(figureContent);
+        }
+    }      
 }
