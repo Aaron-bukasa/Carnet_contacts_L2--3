@@ -161,14 +161,33 @@ textarea {
     font-weight: 400;
     line-height: 18px;
 }
-/* @media screen and (min-width: 481px) {
-    
-}
+
 @media screen and (min-width: 768px) {998
-
+    .profil__image {
+    flex-shrink: 0;
+    width: calc(200px);
+    height: calc(200px);
+    border-radius: 50%;
 }
-@media screen and (min-width: 1024px) {
+.nameAndBtns {
+    display: flex;
+    justify-content: space-between;
+}
+.profilBtn button {
+    margin-left: 10px;
+    padding: 8px;
+    border: none;
+    position: relative;
+    background-color: transparent;
     
-} */
-
-/* VALIDATION*/
+}
+.profilBtn img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+   
+}
+}
