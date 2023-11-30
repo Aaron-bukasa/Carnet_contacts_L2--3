@@ -15,6 +15,9 @@
     --colorBorder02: #DDDDDD;
 }
 
+
+    
+
 /* || GENERAL STYLE */
 body {
     font-family: 'Poppins', sans-serif;
@@ -162,7 +165,54 @@ textarea {
     line-height: 18px;
 }
 
-@media screen and (min-width: 768px) {998
+ @media screen and (max-width: 481px) {
+ 
+.formContact{
+    display: none;
+}
+.listContact{
+   display: flex; 
+   flex-direction: column;
+   justify-content: center;
+   text-align: center;
+   width: 100%;
+}
+.boxContact{
+    margin-inline: 0;
+    
+}
+.contact__profil{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.nameAndBtns {
+    flex-direction: column;
+}
+.profilBtn {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.profilBtn button {
+    display: flex;
+    margin-top: 5px;
+    background-color: var(--colorBlue);
+}
+.profilBtn span {
+   display: block;
+}
+.profilBtn img{
+    width: 30%;
+    height: 40%;
+}
+span{
+    margin-left: 30%;
+}
+}
+
+/* DELETE*/
+@media screen and (max-width: 768px) {998
     .profil__image {
     flex-shrink: 0;
     width: calc(200px);
