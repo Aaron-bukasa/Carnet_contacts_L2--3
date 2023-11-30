@@ -25,7 +25,11 @@ if(contactList === null) {
     contactList = [];
 } else {
     contactList = JSON.parse(contactList);
+<<<<<<< HEAD
     viewContacts();
+=======
+    viewContacts()
+>>>>>>> 962e45c9f35185ef4aab6fbcd73a97ff153a6f4c
 }
 
 // Events
@@ -47,7 +51,11 @@ file.addEventListener("change", (event) => {
     for (const file of files) {
         let img = document.createElement("img");
         const reader = new FileReader();
+<<<<<<< HEAD
         // console.log(reader);
+=======
+        console.log(reader);
+>>>>>>> 962e45c9f35185ef4aab6fbcd73a97ff153a6f4c
         reader.onload = () => {
             document.querySelector('.file span').style.display = 'none';
             document.querySelector('.file label').appendChild(img);
@@ -146,6 +154,10 @@ function validation(input) {
             return;
         }
     }
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 962e45c9f35185ef4aab6fbcd73a97ff153a6f4c
 
     if(input.id == "prenom" || input.id == "nom") {
         charactLength(input, 3, 50)
@@ -285,6 +297,7 @@ function viewContacts() {
         divContactList.append(figureContent);
     }      
 }
+<<<<<<< HEAD
 
 // La fonction qui verifie si la liste de contact est vide pour afficher le message que 'la liste de contact est vide'
 
@@ -304,3 +317,5 @@ function viewContacts() {
 //         console.log('ok');
 //     }
 // };
+=======
+>>>>>>> 962e45c9f35185ef4aab6fbcd73a97ff153a6f4c
