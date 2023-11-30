@@ -25,7 +25,7 @@ if(contactList === null) {
     contactList = [];
 } else {
     contactList = JSON.parse(contactList);
-    viewContacts()
+    viewContacts();
 }
 
 // Events
@@ -47,7 +47,7 @@ file.addEventListener("change", (event) => {
     for (const file of files) {
         let img = document.createElement("img");
         const reader = new FileReader();
-        console.log(reader);
+        // console.log(reader);
         reader.onload = () => {
             document.querySelector('.file span').style.display = 'none';
             document.querySelector('.file label').appendChild(img);
@@ -146,7 +146,6 @@ function validation(input) {
             return;
         }
     }
-    
 
     if(input.id == "prenom" || input.id == "nom") {
         charactLength(input, 3, 50)
@@ -286,3 +285,22 @@ function viewContacts() {
         divContactList.append(figureContent);
     }      
 }
+
+// La fonction qui verifie si la liste de contact est vide pour afficher le message que 'la liste de contact est vide'
+
+// let contentListContact = divContactList.children;
+// contentListContact.onchange = function() {
+//     if(divContactList.length == 0) {
+//         console.log(divContactList);
+//     } else {
+//         console.log('ok');
+//     }
+// };
+
+// contactList.onchange = function() {
+//     if(divContactList.length == 0) {
+//         console.log(divContactList);
+//     } else {
+//         console.log('ok');
+//     }
+// };
