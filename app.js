@@ -47,6 +47,7 @@ file.addEventListener("change", (event) => {
     for (const file of files) {
         let img = document.createElement("img");
         const reader = new FileReader();
+        console.log(reader);
         reader.onload = () => {
             document.querySelector('.file span').style.display = 'none';
             document.querySelector('.file label').appendChild(img);
@@ -54,8 +55,6 @@ file.addEventListener("change", (event) => {
             img.src = imgUrl; 
         };
         reader.readAsDataURL(file);
-        
-    // console.log(fileSize);
     }
 });
 
@@ -136,13 +135,12 @@ function validation(input) {
     }
     let imgValid = (idInput) => {
         let regex = /.+\.(png|jpg)$/;
+
         if(!regex.test(idInput.value)) {
-            console.log("error");
             errorMessage(idInput);
             p.textContent = "Veillez renseigner une image valide";
             return;
         } else if('5Mo') {
-            console.log('ok');
             errorMessage()
             p.textContent = "le poids de l’image doit être inférieur à 5 Mo";
             return;
