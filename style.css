@@ -24,7 +24,9 @@ body {
 }
 #container {
     color: var(--colorDark);
+    height: 100vh;
     margin: 0 auto;
+    position: relative;
 }
 h1, h2 {
     font-size: 20px;
@@ -42,6 +44,9 @@ input {
     width: 100%;
     height: 40px;
 }
+input:focus {
+    outline: none;
+}
 textarea {
     width: 100%;
     height: 100px;
@@ -54,13 +59,15 @@ textarea {
 }
 .boxContact {
     display: flex;
+    justify-content: center;
     column-gap: 15px;
-    margin: 14px 5rem 0;
+    margin: 14px 2% 0;
 }
 
 /* FORMULAIRE DE CONTACT*/
 .formContact {
-    width: 40rem;
+    flex-shrink: 1;
+    flex-basis: 40rem;
     border: 1px solid var(--colorBorder01);
 }
 .formContact h2 {
@@ -75,7 +82,6 @@ textarea {
     display: flex;
     flex-direction: column;
     row-gap: 20px;
-
 }
 .file {
     width: 100%;
@@ -119,22 +125,28 @@ textarea {
 
 /* LISTE DES CONTACTS */
 .listContact {
-    height: min-content;
+    flex-shrink: 1;
+    max-width: 76.4rem;
     border: 1px solid var(--colorBorder02);
     border-bottom: none;
+}
+.listContact__content {
+    height: 82vh;
+    padding: 20px;
+    overflow-y: auto;
 }
 .contact__profil {
     display: flex;
     align-items: center;
-    column-gap: 52px;
-    padding: 20px;
+    column-gap: 25px;
+    padding: 15px;
     border-bottom: 1px solid var(--colorBorder02);
     position: relative;
 }
 .profil__image {
     flex-shrink: 0;
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
     border-radius: 50%;
 }
 .nameAndBtns {
@@ -151,7 +163,6 @@ textarea {
     border: none;
     position: relative;
     background-color: transparent;
-    
 }
 .profilBtn img {
     position: absolute;
@@ -169,6 +180,9 @@ textarea {
     font-weight: 400;
     line-height: 21px;
 }
+.profil__description > * {
+    margin-block: 15px;
+}
 .profil__description .f-tel {
     font-size: 14px;
     font-weight: 400;
@@ -184,7 +198,7 @@ textarea {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50px, -50px);
+    transform: translate(-100px, -50px);
     padding: 14px;
     border-radius: 5px;
     box-shadow: 0 0 3px 2px var(--colorDark);
@@ -207,14 +221,34 @@ textarea {
 .div__confirm .delete-ok {
     background-color: var(--colorRed);
 }
+.p__emptyList {
+    font-size: 1.8rem;
+    text-align: center;
+    line-height: 1.5;
+    padding-top: 3rem;
+    color: var(--colorBorder01);
+}
+#mobileBtn__formView {
+    display: none;
+}
 
 /* || RESPONSIVE TABLETTE */
 @media screen and (max-width: 1024px) {
     .boxContact {
         margin-inline: 1.5%;
     }
+    .formContact {
+        flex-shrink: 2;
+    }
+    .listContact {
+        flex-shrink: 2;
+    }
+    .listContact__content {
+        padding: 20px 5px;
+    }
     .contact__profil {
         flex-direction: column;
+        column-gap: 0;
         row-gap: 15px;
     }
     .profil__image {
@@ -256,7 +290,7 @@ textarea {
         position: relative;
         width: 18px;
     }
-    .profilBtn .profilBtn__delete {
+    .profilBtn .img__delete {
         width: 16px;
     }
     .profilBtn span {
@@ -275,6 +309,14 @@ textarea {
     .formContact {
         display: none;
     }
+    .listContact {
+        width: 40rem;
+        margin: 0 auto;
+    }
+    .profil__image {
+        width: 120px;
+        height: 120px;
+    }
     .profilBtn {
         flex-direction: column;
         row-gap: 5px;
@@ -282,5 +324,16 @@ textarea {
     .profilBtn button {
         display: flex;
         justify-content: center;
+    }
+    #mobileBtn__formView {
+        display: flex;
+        align-items: center;
+        column-gap: 10px;
+        position: absolute;
+        right: 2.2rem;
+        bottom: 2rem;
+        padding: 0.8rem;
+        background-color: hsl(205 93% 79% / 1);
+        border-radius: 14px;
     }
 }

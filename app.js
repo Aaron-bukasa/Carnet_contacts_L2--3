@@ -1,6 +1,6 @@
 // General variables
 
-// Variables des formulaires
+// VARIABLES SUR LE FORMULAIRE
 let prenom, nom, tel, groupe, email, bio, file, btnCreer, btnRenit, inputForm, imgUrl;
 
 prenom = document.querySelector('#prenom');
@@ -15,9 +15,11 @@ btnRenit = document.querySelector('.btn__reset');
 inputForm = document.querySelectorAll('.formContact ul input');
 imgUrl;
 
-// Variables sur la liste des contacts
+// VARIABLES SUR 
+
 let divContactList = document.querySelector('.listContact__content');
 let contactProfil = document.querySelector('.contact__profil');
+
 
 // Tableau des contacts stocké dans le local storage
 let contactList = window.localStorage.getItem('contactList');
@@ -25,153 +27,153 @@ if(contactList === null) {
     contactList = [];
 } else {
     contactList = JSON.parse(contactList);
-<<<<<<< HEAD
     viewContacts();
-=======
-    viewContacts()
->>>>>>> 962e45c9f35185ef4aab6fbcd73a97ff153a6f4c
 }
 
 // Events
 btnCreer.addEventListener('click', (e) => {
     e.preventDefault();
-    addContact();
+    if(nomPrenomValid(prenom) && nomPrenomValid(nom) && telValid(tel) && emailValid(email)) {
+        addContact();
+    }   
 });
 btnRenit.addEventListener('click', formReset);
 inputForm.forEach((element) => {
     element.addEventListener('blur', () => {
-        validation(element);
+        if(element.id === "prenom") {
+            nomPrenomValid(element);
+        }else if(element.id === "nom"){
+            nomPrenomValid(element);
+        } else if(element.id == "tel") {
+            telValid(element);
+        } else if(element.id == 'email') {
+            emailValid(element);
+        }
     })
 })
-file.addEventListener("change", (event) => {
-    const files = event.target.files;
-    if(document.querySelector('.file img')) {
-        document.querySelector('.file img').remove();
-    }
-    for (const file of files) {
-        let img = document.createElement("img");
-        const reader = new FileReader();
-<<<<<<< HEAD
-        // console.log(reader);
-=======
-        console.log(reader);
->>>>>>> 962e45c9f35185ef4aab6fbcd73a97ff153a6f4c
-        reader.onload = () => {
-            document.querySelector('.file span').style.display = 'none';
-            document.querySelector('.file label').appendChild(img);
-            imgUrl = reader.result; 
-            img.src = imgUrl; 
-        };
-        reader.readAsDataURL(file);
-    }
-});
-
+file.addEventListener("change", (e) => {imgValid(e)});
 
 /* LES VALIDATIONS */
-function validation(input) {
-    let p;
-    let errorMessage = (element) => {
-        if(document.querySelector('.formContact ul p')) {
-            document.querySelector('.formContact ul p').remove();
-            p = document.createElement('p');
-            element.style.borderColor = 'red';
-            p.style.color = 'red';
-            element.insertAdjacentElement('afterend', p);
+function errorMessage(element) {
+    if(document.querySelector(`#${element.id} + p`)) {
+        document.querySelector(`#${element.id} + p`).remove();
+        let p = document.createElement('p');
+        element.style.borderColor = 'red';
+        p.style.color = 'red';
+        element.insertAdjacentElement('afterend', p);
+    } else {
+        let p = document.createElement('p');
+        element.style.borderColor = 'red';
+        p.style.color = 'red';
+        element.insertAdjacentElement('afterend', p);
+    }
+}
+function cleanMessage (element) {
+    if(document.querySelector(`#${element.id} + p`)) {
+        document.querySelector(`#${element.id} + p`).remove();
+        element.style.border = ''
+    }
+}
+function imgValid(event){
+    const img = event.target.files[0];
+    let label = document.querySelector('#labelfile');
+    let imageView = () => {
+        if(document.querySelector(`#labelfile img`)) {
+            document.querySelector(`#labelfile img`).remove();
+            let image = document.createElement("img");
+            const reader = new FileReader();
+            reader.readAsDataURL(img);
+            reader.onload = () => {
+                document.querySelector('.file span').style.display = 'none';
+                document.querySelector('.file label').appendChild(image);
+                imgUrl = reader.result; 
+                image.src = imgUrl; 
+            }         
         } else {
-            p = document.createElement('p');
-            element.style.borderColor = 'red';
-            p.style.color = 'red';
-            element.insertAdjacentElement('afterend', p);
+            let image = document.createElement("img");
+            const reader = new FileReader();
+            reader.readAsDataURL(img);
+            reader.onload = () => {
+                document.querySelector('.file span').style.display = 'none';
+                document.querySelector('.file label').appendChild(image);
+                imgUrl = reader.result; 
+                image.src = imgUrl; 
+            }
         }
     }
-    let cleanMessage = (element) => {
-        if(document.querySelector('.formContact ul p')) {
-            document.querySelector('.formContact ul p').remove();
-            element.style.border = ''
+    //^[\w\W]+(\.png|\.jpg)$     ou   /^image\/(png|jpg)$/
+    if (!/^[\w\W]+(\.png|\.jpg)$/.test(img.name)) {
+        errorMessage(label);
+        document.querySelector('#labelfile + p').textContent = "Veillez Renseigner une image valide"
+        a = false;
+        return a;
+    } else {
+        errorMessage(label);
+        if (img.size > 5000000) {
+            document.querySelector('#labelfile + p').textContent = "Le poids de l'image doit être inférieur à 5Mo";
+            a = false;
+            return a;
+        } else {
+            cleanMessage(label);
+            imageView();
+            a = true
+            return a;
         }
     }
-    let charactLength = (element, x, y) => {
-        if(element.value.length < x) {
-            errorMessage(element);
-            document.querySelector('.formContact ul p').textContent = `Veillez renseigner un ${input.id} avec plus de ${x} caractères`;
-            return;
-        } else if(element.value.length > y) {
-            errorMessage(element);
-            p.textContent = `Veillez renseigner un ${element.id} avec moins de ${y} caractères`;
-            return;
-        } else {
-            cleanMessage(element)
-        }
-    }
-    let telValid = (idInput) => {
-        let regex = /^(084|085|080|089|081|082|099|097|090)[0-9]{7}$/;
-        if(isNaN(idInput.value)) {
-            errorMessage(idInput);
-            p.textContent = "Veillez renseigner un numéro de téléphone valide";
-            return;
-        } else if(!(idInput.value.length === 10)) {
-            errorMessage(idInput);
-            p.textContent = "Veillez renseigner un numéro de téléphone avec 10 chiffres ";
-            return;
-        } else if(!regex.test(idInput.value)) {
-            console.log(regex.test(idInput.value));
-            errorMessage(idInput);
-            p.textContent = "Veillez renseigner un numéro de téléphone au format valide";
-            return;
-        } else if(contactList.find((element) => element.tel == idInput.value) !== undefined) {
-            console.log(idInput.value);
-            errorMessage(idInput);
-            p.textContent = "Le numéro de téléphone est déjà utilisé ";
-            return;
-        } else {
-            cleanMessage(idInput)
-        }
-    }
-    let emailValid = (input) => {
-        let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;        
-        if(!regex.test(input.value)) {
-            errorMessage(input);
-            p.textContent = "Veillez renseigner une adresse email valide";
-            return;
-        } else if(contactList.find((element) => element.email == input.value) !== undefined) {
-            errorMessage(input);
-            p.textContent = "Email existe déjà";
-            return;
-        } else {
-            cleanMessage(input);
-        }  
-    }
-    let imgValid = (idInput) => {
-        let regex = /.+\.(png|jpg)$/;
+}
 
-        if(!regex.test(idInput.value)) {
-            errorMessage(idInput);
-            p.textContent = "Veillez renseigner une image valide";
-            return;
-        } else if('5Mo') {
-            errorMessage()
-            p.textContent = "le poids de l’image doit être inférieur à 5 Mo";
-            return;
-        }
+function nomPrenomValid(element) {
+    if(element.value.length < 3) {
+        errorMessage(element);
+        document.querySelector(`#${element.id} + p`).textContent = `Veillez renseigner un ${element.id} avec plus de 3 caractères`;
+        return false;
+    } else if(element.value.length > 50) {
+        errorMessage(element);
+        document.querySelector(`#${element.id} + p`).textContent = `Veillez renseigner un ${element.id} avec moins de 50 caractères`;
+        return false;
+    } else {
+        cleanMessage(element);
+        return true;
     }
-<<<<<<< HEAD
-=======
-    
->>>>>>> 962e45c9f35185ef4aab6fbcd73a97ff153a6f4c
-
-    if(input.id == "prenom" || input.id == "nom") {
-        charactLength(input, 3, 50)
-
-    } else if(input.id == "tel") {
-        telValid(input);       
-    }  else if(input.id == 'email') {
-        emailValid(input);
+}
+function telValid(idInput) {
+    let regex = /^(084|085|080|089|081|082|099|097|090)[0-9]{7}$/;
+    if(isNaN(idInput.value)) {
+        errorMessage(idInput);
+        document.querySelector(`#${idInput.id} + p`).textContent = "Veillez renseigner un numéro de téléphone valide";
+        return false;
+    } else if(!(idInput.value.length === 10)) {
+        errorMessage(idInput);
+        document.querySelector(`#${idInput.id} + p`).textContent = "Veillez renseigner un numéro de téléphone avec 10 chiffres ";
+        return false;
+    } else if(!regex.test(idInput.value)) {
+        errorMessage(idInput);
+        document.querySelector(`#${idInput.id} + p`).textContent = "Veillez renseigner un numéro de téléphone au format valide";
+        return false;
+    } else if(contactList.find((element) => element.tel == idInput.value) !== undefined) {
+        errorMessage(idInput);
+        document.querySelector(`#${idInput.id} + p`).textContent = "Le numéro de téléphone est déjà utilisé ";
+        return false;
+    } else {
+        cleanMessage(idInput);
+        return true;
     }
-    else if(input.id == 'file') {
-       imgValid(input);
-    }
-    
-};
+}
+function emailValid(input) {
+    let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;        
+    if(!regex.test(input.value)) {
+        errorMessage(input);
+        document.querySelector(`#${input.id} + p`).textContent = "Veillez renseigner une adresse email valide";
+        return false;
+    } else if(contactList.find((element) => element.email == input.value) !== undefined) {
+        errorMessage(input);
+        document.querySelector(`#${input.id} + p`).textContent = "Email existe déjà";
+        return false;
+    } else {
+        cleanMessage(input);
+        return true;
+    }  
+}
 
 /* FONCTIONS */
 
@@ -203,7 +205,10 @@ function addContact() {
     window.localStorage.setItem('contactList', tabString);
     viewContacts();
     formReset();
-    document.querySelector('.file img').remove();
+    if(document.querySelector('.file img')) {
+        document.querySelector('.file img').remove();
+    };
+    document.querySelector('.file span').style.display = 'block';
 
 }
 
@@ -233,6 +238,7 @@ function deleteContact(contactElement, position) {
     contactList.splice(position, 1);
     const tabString = JSON.stringify(contactList);
     window.localStorage.setItem('contactList', tabString);
+    viewContacts();
 }
 
 // la fonction qui modifie le contact
@@ -272,32 +278,38 @@ function completedContact(contactElement, position) {
 
 // La fonction qui affiche chaque contact du tableau sur le DOM
 function viewContacts() {
-    divContactList.innerHTML = '';
-    let figureTemplate = document.querySelector('#figure__template');
-    for(let i = 0; i < contactList.length; i++) {
-        let index = i;
-        let figureContent = figureTemplate.content.cloneNode(true);
+    if(contactList.length == 0) {
+        let p = document.createElement('p');
+        p.classList.add('p__emptyList');
+        p.textContent = '-- Votre liste de contact est vide --';
+        divContactList.appendChild(p);
+    } else {
+        divContactList.innerHTML = '';
+        let figureTemplate = document.querySelector('#figure__template');
+        for(let i = 0; i < contactList.length; i++) {
+            let index = i;
+            let figureContent = figureTemplate.content.cloneNode(true);
 
-        figureContent.querySelector('.profil__image').src = `${contactList[i].file}`;
-        figureContent.querySelector('.f-names').textContent = `${contactList[i].prenom} ${contactList[i].nom} - ${contactList[i].groupe}`;
-        figureContent.querySelector('.f-tel').textContent = `${contactList[i].tel}`;
-        figureContent.querySelector('.f-bio').textContent = `${contactList[i].bio}`;
+            figureContent.querySelector('.profil__image').src = `${contactList[i].file}`;
+            figureContent.querySelector('.f-names').textContent = `${contactList[i].prenom} ${contactList[i].nom} - ${contactList[i].groupe}`;
+            figureContent.querySelector('.f-tel').textContent = `${contactList[i].tel}`;
+            figureContent.querySelector('.f-bio').textContent = `${contactList[i].bio}`;
 
-        figureContent.querySelector('.contact__profil').addEventListener('click', (e) => {
-            const clickElement = e.target;
-            if((clickElement.tagName == 'IMG') && (clickElement.className == 'profilBtn__completed')) {
-                completedContact(clickElement, index);
-            }
-            if((clickElement.tagName == 'IMG') && (clickElement.className == 'profilBtn__delete')) {
-                 confirmDelete(clickElement, index);
+            figureContent.querySelector('.contact__profil').addEventListener('click', (e) => {
+                const clickElement = e.target;
+                if((clickElement.className == 'img__completed') || (clickElement.className == 'btn__completed') || (clickElement.className == 'span__completed')) {
+                    completedContact(clickElement, index);
+                }
+                if((clickElement.className == 'img__delete') || (clickElement.className == 'btn__delete') || (clickElement.className == 'span__delete')) {
+                    confirmDelete(clickElement, index);
+                }
+            });
 
-            }
-        });
-
-        divContactList.append(figureContent);
-    }      
+            divContactList.append(figureContent);
+        }      
+    }
 }
-<<<<<<< HEAD
+
 
 // La fonction qui verifie si la liste de contact est vide pour afficher le message que 'la liste de contact est vide'
 
@@ -317,5 +329,3 @@ function viewContacts() {
 //         console.log('ok');
 //     }
 // };
-=======
->>>>>>> 962e45c9f35185ef4aab6fbcd73a97ff153a6f4c

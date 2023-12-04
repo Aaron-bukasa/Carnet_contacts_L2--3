@@ -42,10 +42,10 @@
                             <label for="bio">Bio</label>
                             <textarea id="bio" name="bio"></textarea>
                         </li>
-                        <li class="file">
-                            <label for="file">
+                        <li class="file" accept="image/*">
+                            <label for="file" id="labelfile">
                                 <span>Déposer la photo<br />ici</span>
-                                <input type="file" id="file" name="file" alt="Déposer la photo">
+                                <input type="file" id="file" name="file">
                             </label>
                         </li>
                     </ul>
@@ -63,8 +63,10 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div id="btn__menu">
+        <div id="mobileBtn__formView">
+            <img src="./img/edit.svg" alt="button menu">
+            <span>Nouveau contact</span>
+        </div>
     </div>
 
     <!-- TEMPLATE-FIGURE -->
@@ -75,15 +77,15 @@
                 <div class="nameAndBtns">
                     <p class="f-names">Prénom Nom - Groupe</p>
                     <div class="profilBtn">
-                        <button>
-                            <img src="./img/edit.svg" class="profilBtn__completed" alt="editer le contact">
-                            <span>
+                        <button class="btn__completed">
+                            <img src="./img/edit.svg" class="img__completed" alt="editer le contact">
+                            <span class="span__completed">
                                 Modifier le contact
                             </span>
                         </button>
-                        <button>
-                            <img src="./img/delete.svg" class="profilBtn__delete" alt="contact delete">
-                            <span>
+                        <button class="btn__delete">
+                            <img src="./img/delete.svg" class="img__delete" alt="contact delete">
+                            <span class="span__delete">
                                 Supprimer le contact
                             </span>
                         </button>
