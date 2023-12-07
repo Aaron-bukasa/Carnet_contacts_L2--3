@@ -1,54 +1,28 @@
-// General variables
-
-// VARIABLES SUR LE FORMULAIRE
-let prenom, nom, tel, groupe, email, bio, file, btnCreer, btnRenit, inputForm, imgUrl;
-
-prenom = document.querySelector('#prenom');
-nom = document.querySelector('#nom');
-tel = document.querySelector('#tel');
-groupe = document.querySelector('#groupe');
-email = document.querySelector('#email');
-bio = document.querySelector('#bio');
-file = document.querySelector('#file');
-btnCreer = document.querySelector('.btn__submit');
-btnRenit = document.querySelector('.btn__reset');
-inputForm = document.querySelectorAll('.formContact ul input');
-
-// VARIABLES SUR LA LISTE DES CONTACTS
-
-let divContactList = document.querySelector('.listContact__content');
+const form = document.querySelector('.formContact');
+const listContact = document.querySelector('.listContact');
+const figureTemplate = document.querySelector('#figure__template');
+const divContactList = document.querySelector('.listContact__content');
 let contactProfil = document.querySelector('.contact__profil');
 let labelFile = document.querySelector('#labelfile');
+let focusElement;
+let focusIndex;
 
+// Input elements
+const prenom = document.querySelector('#prenom');
+const nom = document.querySelector('#nom');
+const tel = document.querySelector('#tel');
+const groupe = document.querySelector('#groupe');
+const email = document.querySelector('#email');
+const bio = document.querySelector('#bio');
+const file = document.querySelector('#file');
+let imgUrl;
 
-// Tableau des contacts stocké dans le local storage
-let contactList = window.localStorage.getItem('contactList');
-if(contactList === null) {  
-    contactList = [];
-} else {
-    contactList = JSON.parse(contactList);
-    viewContacts();
-}
+// Button elements
+btnCreer = document.querySelector('.btn__submit');
+btnRenit = document.querySelector('.btn__reset');
 
-// Events
-btnCreer.addEventListener('click', (e) => {
-    console.log(btnCreer);
-    if(btnCreer.value = "Modifier") {
-        addContact();
-    } else {
-        if(!nomPrenomValid(prenom) || !nomPrenomValid(nom) || !telValid(tel) || !emailValid(email)) {
-            e.preventDefault();
-        } else {
-            addContact();
-        }
-    }
-});
-btnRenit.addEventListener('click', formReset);
-document.querySelector('#mobileBtn__formView').addEventListener('click', () => {
-    document.querySelector('.formContact').style.display = 'block';
-    document.querySelector('.listContact').style.display = 'none';
-    document.querySelector('#mobileBtn__formView').style.display = 'none';
-})
+// Input listeners
+let inputForm = document.querySelectorAll('.formContact ul input');
 inputForm.forEach((element) => {
     element.addEventListener('blur', () => {
         if(element.id === "prenom") {
@@ -87,76 +61,94 @@ labelFile.addEventListener(
         e.preventDefault();
         let file = e.dataTransfer.files[0]
         imgValid(file);
+        labelFile.style.backgroundColor = '';
     },
     false
 );
 
-/* LES VALIDATIONS */
-function errorMessage(element) {
-    if(document.querySelector(`#${element.id} + p`)) {
-        document.querySelector(`#${element.id} + p`).remove();
-        let p = document.createElement('p');
-        element.style.borderColor = 'red';
-        p.style.color = 'red';
-        element.insertAdjacentElement('afterend', p);
+// Button listeners
+btnCreer.addEventListener('click', (e) => {
+    e.preventDefault();
+    addModified();
+})
+function addModified() {
+    if(btnCreer.value === 'Modifier') {
+        deleteContact(focusElement, focusIndex);
+
+        btnCreer.value = "Créer";
+        btnCreer.classList.remove('btn-modifier');
+        btnRenit.value = "Réinit";
+        addContact();
+
+        document.querySelector('#mobileBtn__formView').style.display = 'block';
     } else {
-        let p = document.createElement('p');
-        element.style.borderColor = 'red';
-        p.style.color = 'red';
-        element.insertAdjacentElement('afterend', p);
+        if(!nomPrenomValid(prenom) || !nomPrenomValid(nom) || !telValid(tel) || !emailValid(email)) {
+            console.log('erreur');
+        } else {
+            addContact()
+        }
     }
 }
+btnRenit.addEventListener('click', formReset);
+
+// Mobile button listener
+document.querySelector('#mobileBtn__formView').addEventListener('click', () => {
+    form.style.display = 'block';
+    listContact.style.display = 'none';
+    document.querySelector('#mobileBtn__formView').style.display = 'none';
+})
+
+// Tableau des contacts stocké dans le local storage
+let contactList = window.localStorage.getItem('contactList');
+if(contactList === null) {  
+    contactList = [];
+} else {
+    contactList = JSON.parse(contactList);
+    viewContacts();
+}
+
+/* les fonctions de validation */
+function errorMessage(element) {
+    let pError = document.querySelector(`#${element.id} + p`);
+    pError ? pError.remove() : pError;
+    let p = document.createElement('p');
+    element.style.borderColor = 'red';
+    p.style.color = 'red';
+    element.insertAdjacentElement('afterend', p);
+}
 function cleanMessage (element) {
-    if(document.querySelector(`#${element.id} + p`)) {
-        document.querySelector(`#${element.id} + p`).remove();
-        element.style.border = ''
-    }
+    let pClean = document.querySelector(`#${element.id} + p`);
+    pClean ? pClean.remove() : pClean;
+     element.style.border = '';
 }
 function imgValid(element){
     const img = element;
-    let label = document.querySelector('#labelfile');
     let imageView = () => {
-        if(document.querySelector(`#labelfile img`)) {
-            document.querySelector(`#labelfile img`).remove();
-            let image = document.createElement("img");
-            const reader = new FileReader();
-            reader.readAsDataURL(img);
-            reader.onload = () => {
-                document.querySelector('.file span').style.display = 'none';
-                document.querySelector('.file label').appendChild(image);
-                imgUrl = reader.result;
-                image.src = imgUrl;
-
-            }         
-        } else {
-            let image = document.createElement("img");
-            const reader = new FileReader();
-            reader.readAsDataURL(img);
-            reader.onload = () => {
-                document.querySelector('.file span').style.display = 'none';
-                document.querySelector('.file label').appendChild(image);
-                imgUrl = reader.result;
-                image.src = imgUrl;
-            }
+        let newImg = document.querySelector(`#labelfile img`);
+        newImg ? newImg.remove() : newImg;
+        let image = document.createElement("img");
+        const reader = new FileReader();
+        reader.readAsDataURL(img);
+        reader.onload = () => {
+            document.querySelector('.file span').style.display = 'none';
+            document.querySelector('.file label').appendChild(image);
+            imgUrl = reader.result;
+            image.src = imgUrl;
         }
     }
-    //^[\w\W]+(\.png|\.jpg)$     ou   /^image\/(png|jpg)$/
     if (!/^image\/(png|jpg|jpeg)$/.test(img.type)) {
-        errorMessage(label);
+        errorMessage(labelFile);
         document.querySelector('#labelfile + p').textContent = "Veillez Renseigner une image valide"
-        a = false;
-        return a;
+        return false;
     } else {
-        errorMessage(label);
+        errorMessage(labelFile);
         if (img.size > 5000000) {
             document.querySelector('#labelfile + p').textContent = "Le poids de l'image doit être inférieur à 5Mo";
-            a = false;
-            return a;
+            return false;
         } else {
-            cleanMessage(label);
+            cleanMessage(labelFile);
             imageView();
-            a = true
-            return a;
+            return true;
         }
     }
 }
@@ -175,6 +167,7 @@ function nomPrenomValid(element) {
         return true;
     }
 }
+
 function telValid(idInput) {
     let regex = /^(084|085|080|089|081|082|099|097|090)[0-9]{7}$/;
     if(isNaN(idInput.value)) {
@@ -225,7 +218,8 @@ function formReset() {
     email.value = "";
     bio.value = "";
     imgUrl = "";
-
+    document.querySelector('#labelfile img') ? document.querySelector('#labelfile img').remove() : document.querySelector('#labelfile img');
+    document.querySelector('.file span').style.display = 'block';
 }
 
 // La fonction qui ajoute le contact dans le tableau des contacts
@@ -248,7 +242,6 @@ function addContact() {
         document.querySelector('.file img').remove();
     };
     document.querySelector('.file span').style.display = 'block';
-
 }
 
 // la fonction de confirmation de la suppression d'un contact
@@ -272,19 +265,20 @@ function confirmDelete(element, indexElement) {
 }
 
 // la fonction qui supprime le contact
-function deleteContact(contactElement, position) {
+function deleteContact(contactElement, index) {
     contactElement.closest(".contact__profil").remove();
-    contactList.splice(position, 1);
+    contactList.splice(index, 1);
     const tabString = JSON.stringify(contactList);
     window.localStorage.setItem('contactList', tabString);
 }
 
 // la fonction qui modifie le contact
-function completedContact(contactElement, position) {
-    document.querySelector('.listContact').style.display = 'none';
-    contactElement.closest(".contact__profil").style.backgroundColor = '#99d2fa';
+function completedContact(element, index) {
+    focusElement = element;
+    focusIndex = index;
+    element.closest(".contact__profil").classList.add('contact__profil-bg');
 
-    let contact = contactList[position];
+    let contact = contactList[index];
 
     prenom.value = contact.prenom;
     nom.value = contact.nom;
@@ -294,31 +288,16 @@ function completedContact(contactElement, position) {
     bio.value = contact.bio;
     imgUrl = contact.file;
     
-    if(document.querySelector('#labelfile img')) {
-        document.querySelector('#labelfile img').remove();
-        let label = document.querySelector('#labelfile');
-        let img = document.createElement('img');
-        img.src = imgUrl;
-        label.appendChild(img);
-        document.querySelector('#labelfile span').style.display = 'none';
-    } else {
-        let label = document.querySelector('#labelfile');
-        let img = document.createElement('img');
-        img.src = imgUrl;
-        label.appendChild(img);
-        document.querySelector('#labelfile span').style.display = 'none';
-    }
-    
+    document.querySelector('#labelfile img') ? document.querySelector('#labelfile img').remove() : document.querySelector('#labelfile img');
+    let img = document.createElement('img');
+    img.src = imgUrl;
+    labelFile.appendChild(img);
+    document.querySelector('#labelfile span').style.display = 'none';
 
     btnCreer.value = "Modifier";
+    btnCreer.classList.add('btn-modifier');
     btnRenit.value = "Annuler";
 
-    btnCreer.addEventListener('click', () => {
-        deleteContact(contactElement, position);
-        viewContacts();
-        btnCreer.value = "Créer";
-        btnRenit.value = "Réinit";
-    })
     btnRenit.addEventListener('click', () => {
         prenom.value = '';
         nom.value = '';
@@ -327,18 +306,26 @@ function completedContact(contactElement, position) {
         email.value = '';
         bio.value = '';
         imgUrl = '';
-        btnCreer.value = "Créer";
-        btnRenit.value = "Réinit";
-        document.querySelector('#labelfile img').remove();
-    })
 
+        btnCreer.value = "Créer";
+        btnCreer.classList.remove('btn-modifier');
+        btnRenit.value = "Réinit";
+
+        element.style.backgroundColor = '';
+        document.querySelector('#labelfile img') ? document.querySelector('#labelfile img').remove() : document.querySelector('#labelfile img');
+        element.closest(".contact__profil").classList.remove('contact__profil-bg');
+
+        form.classList.add('formContact-mobile');
+        listContact.classList.remove('listContact-mobile');
+        document.querySelector('#mobileBtn__formView').style.display = 'block';
+    })
 }
 
 // La fonction qui affiche chaque contact du tableau sur le DOM
 function viewContacts() {
-    let pEmptyList = document.querySelector('.p__emptyList');
-    let form = document.querySelector('.formContact');
-    let listContact = document.querySelector('.listContact');
+    divContactList.innerHTML = '';
+    let pEmptyList = document.createElement('p');
+    divContactList.appendChild(pEmptyList);
 
     if(contactList.length == 0) {
         form.classList.remove('formContact-mobile');
@@ -347,7 +334,6 @@ function viewContacts() {
         document.querySelector('#mobileBtn__formView').style.display = 'none';          
     } else {
         pEmptyList.style.display = 'none';
-        let figureTemplate = document.querySelector('#figure__template');
         for(let i = 0; i < contactList.length; i++) {
             let index = i;
             let figureContent = figureTemplate.content.cloneNode(true);
@@ -363,16 +349,24 @@ function viewContacts() {
 
             figureContent.querySelector('.contact__profil').addEventListener('click', (e) => {
                 const clickElement = e.target;
+                let bgContactModifier = document.querySelector('.contact__profil-bg');
                 if((clickElement.className == 'img__completed') || (clickElement.className == 'btn__completed') || (clickElement.className == 'span__completed')) {
+
                     completedContact(clickElement, index);
-                }
-                if((clickElement.className == 'img__delete') || (clickElement.className == 'btn__delete') || (clickElement.className == 'span__delete')) {
+                    bgContactModifier ? bgContactModifier.classList.remove('contact__profil-bg') : bgContactModifier;
+
+                    form.classList.remove('formContact-mobile');
+                    listContact.classList.add('listContact-mobile');
+                    document.querySelector('#mobileBtn__formView').style.display = 'none';
+
+                } else if((clickElement.className == 'img__delete') || (clickElement.className == 'btn__delete') || (clickElement.className == 'span__delete')) {
                     confirmDelete(clickElement, index);
+
+                    bgContactModifier ? bgContactModifier.classList.remove('contact__profil-bg') : bgContactModifier;
                 }
             });
 
             divContactList.append(figureContent);
-
             form.classList.add('formContact-mobile');
             listContact.classList.remove('listContact-mobile');
         }

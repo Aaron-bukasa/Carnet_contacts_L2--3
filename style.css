@@ -95,7 +95,7 @@ textarea {
     text-align: center;
     color: var(--colorDark);
     width: 100%;
-    height: 105px; 
+    height: 100%; 
     border: 2px dashed var(--colorBorder01);
     overflow: hidden;
 }
@@ -132,12 +132,10 @@ textarea {
 .listContact {
     flex-shrink: 1;
     width: 76.4rem;
-    border: 1px solid var(--colorBorder02);
     border-bottom: none;
 }
 .listContact__content {
     height: 82vh;
-    padding: 20px;
     overflow-y: auto;
 }
 .contact__profil {
@@ -146,6 +144,7 @@ textarea {
     column-gap: 25px;
     padding: 15px;
     border-bottom: 1px solid var(--colorBorder02);
+    border-inline: 1px solid var(--colorBorder02);
     position: relative;
 }
 .profil__image {
@@ -247,6 +246,9 @@ textarea {
 #mobileBtn__formView {
     display: none;
 }
+.contact__profil-bg {
+    background-color: #99d2fa;
+}
 
 /* || RESPONSIVE TABLETTE */
 @media screen and (max-width: 1024px) {
@@ -306,10 +308,25 @@ textarea {
     .f-tel {
         text-align: center;
     }
+    .img__desktop {
+        display: none;
+    }
+    .img__mobile {
+        display: block !important;
+    }
 }
 
 /* || RESPONSIVE MOBILE */
 @media screen and (max-width: 786px) {
+    input {
+        height: 32px;
+    }
+    textarea {
+        height: 80px;
+    }
+    .file {
+        height: 80px;
+    }
     .boxContact {
         margin-inline: 2rem;
     }
@@ -328,6 +345,9 @@ textarea {
     .profilBtn button {
         display: flex;
         justify-content: center;
+    }
+    .div__confirm {
+        transform: translate(-90px, -50px);
     }
     #mobileBtn__formView {
         display: flex;
