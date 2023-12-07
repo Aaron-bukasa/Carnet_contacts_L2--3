@@ -13,12 +13,12 @@ file = document.querySelector('#file');
 btnCreer = document.querySelector('.btn__submit');
 btnRenit = document.querySelector('.btn__reset');
 inputForm = document.querySelectorAll('.formContact ul input');
-imgUrl;
 
-// VARIABLES SUR 
+// VARIABLES SUR LA LISTE DES CONTACTS
 
 let divContactList = document.querySelector('.listContact__content');
 let contactProfil = document.querySelector('.contact__profil');
+let labelFile = document.querySelector('#labelfile');
 
 
 // Tableau des contacts stocké dans le local storage
@@ -32,12 +32,23 @@ if(contactList === null) {
 
 // Events
 btnCreer.addEventListener('click', (e) => {
-    e.preventDefault();
-    if(nomPrenomValid(prenom) && nomPrenomValid(nom) && telValid(tel) && emailValid(email)) {
+    console.log(btnCreer);
+    if(btnCreer.value = "Modifier") {
         addContact();
-    }   
+    } else {
+        if(!nomPrenomValid(prenom) || !nomPrenomValid(nom) || !telValid(tel) || !emailValid(email)) {
+            e.preventDefault();
+        } else {
+            addContact();
+        }
+    }
 });
 btnRenit.addEventListener('click', formReset);
+document.querySelector('#mobileBtn__formView').addEventListener('click', () => {
+    document.querySelector('.formContact').style.display = 'block';
+    document.querySelector('.listContact').style.display = 'none';
+    document.querySelector('#mobileBtn__formView').style.display = 'none';
+})
 inputForm.forEach((element) => {
     element.addEventListener('blur', () => {
         if(element.id === "prenom") {
@@ -51,7 +62,34 @@ inputForm.forEach((element) => {
         }
     })
 })
-file.addEventListener("change", (e) => {imgValid(e)});
+file.addEventListener("change", (e) => {
+    e.preventDefault();
+    let file = e.target.files[0];
+    imgValid(file);
+});
+labelFile.addEventListener(
+    "dragover",
+    function (event) {
+      event.preventDefault();
+      labelFile.style.backgroundColor = '#99d2fa';
+    }
+  );
+labelFile.addEventListener(
+    "dragleave",
+    function (event) {
+        event.preventDefault();
+        labelFile.style.backgroundColor = '';
+    }
+);
+labelFile.addEventListener(
+    "drop",
+    function (e) {
+        e.preventDefault();
+        let file = e.dataTransfer.files[0]
+        imgValid(file);
+    },
+    false
+);
 
 /* LES VALIDATIONS */
 function errorMessage(element) {
@@ -74,8 +112,8 @@ function cleanMessage (element) {
         element.style.border = ''
     }
 }
-function imgValid(event){
-    const img = event.target.files[0];
+function imgValid(element){
+    const img = element;
     let label = document.querySelector('#labelfile');
     let imageView = () => {
         if(document.querySelector(`#labelfile img`)) {
@@ -86,8 +124,9 @@ function imgValid(event){
             reader.onload = () => {
                 document.querySelector('.file span').style.display = 'none';
                 document.querySelector('.file label').appendChild(image);
-                imgUrl = reader.result; 
-                image.src = imgUrl; 
+                imgUrl = reader.result;
+                image.src = imgUrl;
+
             }         
         } else {
             let image = document.createElement("img");
@@ -96,13 +135,13 @@ function imgValid(event){
             reader.onload = () => {
                 document.querySelector('.file span').style.display = 'none';
                 document.querySelector('.file label').appendChild(image);
-                imgUrl = reader.result; 
-                image.src = imgUrl; 
+                imgUrl = reader.result;
+                image.src = imgUrl;
             }
         }
     }
     //^[\w\W]+(\.png|\.jpg)$     ou   /^image\/(png|jpg)$/
-    if (!/^[\w\W]+(\.png|\.jpg)$/.test(img.name)) {
+    if (!/^image\/(png|jpg|jpeg)$/.test(img.type)) {
         errorMessage(label);
         document.querySelector('#labelfile + p').textContent = "Veillez Renseigner une image valide"
         a = false;
@@ -238,11 +277,13 @@ function deleteContact(contactElement, position) {
     contactList.splice(position, 1);
     const tabString = JSON.stringify(contactList);
     window.localStorage.setItem('contactList', tabString);
-    viewContacts();
 }
 
 // la fonction qui modifie le contact
 function completedContact(contactElement, position) {
+    document.querySelector('.listContact').style.display = 'none';
+    contactElement.closest(".contact__profil").style.backgroundColor = '#99d2fa';
+
     let contact = contactList[position];
 
     prenom.value = contact.prenom;
@@ -252,6 +293,22 @@ function completedContact(contactElement, position) {
     email.value =contact.email;
     bio.value = contact.bio;
     imgUrl = contact.file;
+    
+    if(document.querySelector('#labelfile img')) {
+        document.querySelector('#labelfile img').remove();
+        let label = document.querySelector('#labelfile');
+        let img = document.createElement('img');
+        img.src = imgUrl;
+        label.appendChild(img);
+        document.querySelector('#labelfile span').style.display = 'none';
+    } else {
+        let label = document.querySelector('#labelfile');
+        let img = document.createElement('img');
+        img.src = imgUrl;
+        label.appendChild(img);
+        document.querySelector('#labelfile span').style.display = 'none';
+    }
+    
 
     btnCreer.value = "Modifier";
     btnRenit.value = "Annuler";
@@ -272,23 +329,32 @@ function completedContact(contactElement, position) {
         imgUrl = '';
         btnCreer.value = "Créer";
         btnRenit.value = "Réinit";
+        document.querySelector('#labelfile img').remove();
     })
 
 }
 
 // La fonction qui affiche chaque contact du tableau sur le DOM
 function viewContacts() {
+    let pEmptyList = document.querySelector('.p__emptyList');
+    let form = document.querySelector('.formContact');
+    let listContact = document.querySelector('.listContact');
+
     if(contactList.length == 0) {
-        let p = document.createElement('p');
-        p.classList.add('p__emptyList');
-        p.textContent = '-- Votre liste de contact est vide --';
-        divContactList.appendChild(p);
+        form.classList.remove('formContact-mobile');
+        listContact.classList.add('listContact-mobile')
+        pEmptyList.style.display = 'block';  
+        document.querySelector('#mobileBtn__formView').style.display = 'none';          
     } else {
-        divContactList.innerHTML = '';
+        pEmptyList.style.display = 'none';
         let figureTemplate = document.querySelector('#figure__template');
         for(let i = 0; i < contactList.length; i++) {
             let index = i;
             let figureContent = figureTemplate.content.cloneNode(true);
+
+            if(contactList[i].file == undefined) {
+                contactList[i].file = './img/profile-female.png';
+            }
 
             figureContent.querySelector('.profil__image').src = `${contactList[i].file}`;
             figureContent.querySelector('.f-names').textContent = `${contactList[i].prenom} ${contactList[i].nom} - ${contactList[i].groupe}`;
@@ -306,26 +372,9 @@ function viewContacts() {
             });
 
             divContactList.append(figureContent);
-        }      
+
+            form.classList.add('formContact-mobile');
+            listContact.classList.remove('listContact-mobile');
+        }
     }
 }
-
-
-// La fonction qui verifie si la liste de contact est vide pour afficher le message que 'la liste de contact est vide'
-
-// let contentListContact = divContactList.children;
-// contentListContact.onchange = function() {
-//     if(divContactList.length == 0) {
-//         console.log(divContactList);
-//     } else {
-//         console.log('ok');
-//     }
-// };
-
-// contactList.onchange = function() {
-//     if(divContactList.length == 0) {
-//         console.log(divContactList);
-//     } else {
-//         console.log('ok');
-//     }
-// };

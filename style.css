@@ -21,6 +21,7 @@ body {
     font-size: 16px;
     font-weight: 500;
     line-height: 24px;
+    height: 100vh;
 }
 #container {
     color: var(--colorDark);
@@ -112,7 +113,11 @@ textarea {
     column-gap: 36px;
     margin-top: 20px;
 }
+.btns input:hover {
+    opacity: 0.7;
+}
 .btn__submit, .btn__reset {
+    cursor: pointer;
     color: var(--colorLight);
     background-color: var(--colorBlue);
     width: auto;
@@ -126,7 +131,7 @@ textarea {
 /* LISTE DES CONTACTS */
 .listContact {
     flex-shrink: 1;
-    max-width: 76.4rem;
+    width: 76.4rem;
     border: 1px solid var(--colorBorder02);
     border-bottom: none;
 }
@@ -145,9 +150,12 @@ textarea {
 }
 .profil__image {
     flex-shrink: 0;
-    width: 180px;
-    height: 180px;
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
+}
+.profil__description {
+    width: 100%;
 }
 .nameAndBtns {
     display: flex;
@@ -157,12 +165,20 @@ textarea {
     font-size: 1rem;
     font-weight: 500;
 }
+.profilBtn {
+    display: flex;
+    justify-content: center;
+    column-gap: 30px;
+}
 .profilBtn button {
-    margin-left: 10px;
+    cursor: pointer;
     padding: 8px;
     border: none;
     position: relative;
     background-color: transparent;
+}
+.profilBtn button:hover {
+    opacity: 0.7;
 }
 .profilBtn img {
     position: absolute;
@@ -237,23 +253,16 @@ textarea {
     .boxContact {
         margin-inline: 1.5%;
     }
-    .formContact {
-        flex-shrink: 2;
-    }
-    .listContact {
-        flex-shrink: 2;
-    }
     .listContact__content {
         padding: 20px 5px;
     }
     .contact__profil {
         flex-direction: column;
-        column-gap: 0;
         row-gap: 15px;
     }
     .profil__image {
-        width: 150px;
-        height: 150px;
+        width: 130px;
+        height: 130px;
     }
     .profil__description > * {
         margin-block: 12px
@@ -267,9 +276,7 @@ textarea {
         font-weight: 700;
     }
     .profilBtn {
-        display: flex;
-        justify-content: center;
-        column-gap: 5px;
+        column-gap: 15px;
         width: 100%;
     }
     .profilBtn button {
@@ -306,16 +313,13 @@ textarea {
     .boxContact {
         margin-inline: 2rem;
     }
-    .formContact {
-        display: none;
-    }
     .listContact {
         width: 40rem;
         margin: 0 auto;
     }
     .profil__image {
-        width: 120px;
-        height: 120px;
+        width: 105px;
+        height: 105px;
     }
     .profilBtn {
         flex-direction: column;
@@ -333,7 +337,14 @@ textarea {
         right: 2.2rem;
         bottom: 2rem;
         padding: 0.8rem;
-        background-color: hsl(205 93% 79% / 1);
+        background-color: #99d2fa;
         border-radius: 14px;
+        cursor: pointer;
+    } 
+    .formContact-mobile {
+        display: none;
+    }
+    .listContact-mobile {
+        display: none;
     }
 }
