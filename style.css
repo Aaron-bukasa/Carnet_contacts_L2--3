@@ -22,12 +22,11 @@ body {
     font-weight: 500;
     line-height: 24px;
     height: 100vh;
+    position: relative;
 }
 #container {
     color: var(--colorDark);
-    height: 100vh;
     margin: 0 auto;
-    position: relative;
 }
 h1, h2 {
     font-size: 20px;
@@ -308,16 +307,19 @@ textarea {
     .f-tel {
         text-align: center;
     }
-    .img__desktop {
+    .img__completed, .img__delete {
         display: none;
     }
-    .img__mobile {
+    .img__mobile-completed, .img__mobile-delete {
         display: block !important;
     }
 }
 
 /* || RESPONSIVE MOBILE */
 @media screen and (max-width: 786px) {
+    .titleHeader-mobile {
+       padding-left: 50px;
+    }
     input {
         height: 32px;
     }
@@ -365,6 +367,9 @@ textarea {
         display: none;
     }
     .listContact-mobile {
+        display: none;
+    }
+    .arrow_back {
         display: none;
     }
 }

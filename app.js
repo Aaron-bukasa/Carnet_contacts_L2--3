@@ -1,3 +1,4 @@
+//Global variables
 const form = document.querySelector('.formContact');
 const listContact = document.querySelector('.listContact');
 const figureTemplate = document.querySelector('#figure__template');
@@ -62,8 +63,7 @@ labelFile.addEventListener(
         let file = e.dataTransfer.files[0]
         imgValid(file);
         labelFile.style.backgroundColor = '';
-    },
-    false
+    }
 );
 
 // Button listeners
@@ -83,7 +83,6 @@ function addModified() {
         document.querySelector('#mobileBtn__formView').style.display = 'block';
     } else {
         if(!nomPrenomValid(prenom) || !nomPrenomValid(nom) || !telValid(tel) || !emailValid(email)) {
-            console.log('erreur');
         } else {
             addContact()
         }
@@ -92,10 +91,16 @@ function addModified() {
 btnRenit.addEventListener('click', formReset);
 
 // Mobile button listener
-document.querySelector('#mobileBtn__formView').addEventListener('click', () => {
+const btnMobile = document.querySelector('#mobileBtn__formView');
+const arrowBack = document.querySelector('.arrow_back');
+const logoNewContact = document.querySelector('.logo__newContact');
+const spanNewContact = document.querySelector('.logo__newContact ~ span');
+btnMobile.addEventListener('click', () => {
     form.style.display = 'block';
     listContact.style.display = 'none';
-    document.querySelector('#mobileBtn__formView').style.display = 'none';
+    arrowBack.style.display = 'block';
+    logoNewContact.style.display = 'none';
+    spanNewContact.style.display = 'none';
 })
 
 // Tableau des contacts stocké dans le local storage
@@ -246,15 +251,24 @@ function addContact() {
 
 // la fonction de confirmation de la suppression d'un contact
 function confirmDelete(element, indexElement) {
-    let div = document.createElement('div');
+    const div = document.createElement('div');
+    const pMessage = document.createElement('p');
+    const divBtns = document.createElement('div');
+    const btnNo = document.createElement('button');
+    const btnOk = document.createElement('button');
+
     div.classList.add('div__confirm');
-    div.innerHTML = `
-                <p>Voulez-vous vraiment supprimer ce contact ?</p>
-                <div>
-                    <button class="delete-annule">Annuler</button>
-                    <button class="delete-ok">Ok</button>
-                </div>
-                `
+    pMessage.textContent = "Voulez-vous vraiment supprimer ce contact ?";
+    btnNo.classList.add('delete-annule');
+    btnNo.textContent = "Annuler";
+    btnOk.classList.add('delete-ok');
+    btnOk.textContent = "OK";
+
+    divBtns.appendChild(btnNo);
+    divBtns.appendChild(btnOk);
+    div.appendChild(pMessage);
+    div.appendChild(divBtns);
+
     div.querySelector('.delete-annule').onclick = () => {
         div.remove(); 
         element.closest(".contact__profil").classList.remove('contact__profil-confirm');
@@ -350,7 +364,7 @@ function viewContacts() {
             figureContent.querySelector('.contact__profil').addEventListener('click', (e) => {
                 const clickElement = e.target;
                 let bgContactModifier = document.querySelector('.contact__profil-bg');
-                if((clickElement.className == 'img__completed') || (clickElement.className == 'btn__completed') || (clickElement.className == 'span__completed')) {
+                if((clickElement.className == 'img__completed') || (clickElement.className == 'btn__completed') || (clickElement.className == 'span__completed') || (clickElement.className == 'img__mobile-completed')) {
 
                     completedContact(clickElement, index);
                     bgContactModifier ? bgContactModifier.classList.remove('contact__profil-bg') : bgContactModifier;
@@ -359,7 +373,7 @@ function viewContacts() {
                     listContact.classList.add('listContact-mobile');
                     document.querySelector('#mobileBtn__formView').style.display = 'none';
 
-                } else if((clickElement.className == 'img__delete') || (clickElement.className == 'btn__delete') || (clickElement.className == 'span__delete')) {
+                } else if((clickElement.className == 'img__delete') || (clickElement.className == 'btn__delete') || (clickElement.className == 'span__delete') || (clickElement.className == 'img__mobile-delete')) {
                     confirmDelete(clickElement, index);
 
                     bgContactModifier ? bgContactModifier.classList.remove('contact__profil-bg') : bgContactModifier;
