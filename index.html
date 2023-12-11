@@ -14,7 +14,7 @@
     <div id="container">
         <h1 class="titleHeader">Répertoire des contacts</h1>
         <div class="boxContact">
-            <form class="formContact formContact-mobile" action="">
+            <form class="formContact formContact-mobile" action="#">
                 <h2>Formulaire de contact</h2>
                 <div>
                     <ul>
@@ -42,9 +42,9 @@
                             <label for="bio">Bio</label>
                             <textarea id="bio" name="bio"></textarea>
                         </li>
-                        <li class="file" accept="image/*">
+                        <li class="file">
                             <label for="file" id="labelfile">
-                                <span>Déposer la photo<br />ici</span>
+                                <span>Déposer la photo<br>ici</span>
                                 <input type="file" id="file" name="file">
                             </label>
                         </li>
@@ -61,12 +61,10 @@
                 </h2>
                 <div class="listContact__content">
                 </div>
+                <div id="mobileBtn__formView" class="mobileBtn__formView">
+                    <img src="./img/edit.svg" class="logo__newContact" alt="button menu">
+                </div>
             </div>
-        </div>
-        <div id="mobileBtn__formView">
-            <img src="./img/edit.svg" class="logo__newContact" alt="button menu">
-            <img class="arrow_back" src="./img/arrow_back.svg" alt="arrow back">
-            <span>Nouveau contact</span>
         </div>
     </div>
 
@@ -98,11 +96,10 @@
                     Télephone
                 </p>
                 <p class="f-bio">
-                    What is Lorem Ipsum ?<br />Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                    What is Lorem Ipsum ?Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
                 </p>
             </figcaption>
         </figure>
     </template>
-
 </body>
 </html>
