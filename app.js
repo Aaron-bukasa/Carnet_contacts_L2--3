@@ -69,9 +69,9 @@ labelFile.addEventListener(
 // Button listeners
 btnCreer.addEventListener('click', (e) => {
     e.preventDefault();
-    addModified();
+    addOrModified();
 })
-function addModified() {
+function addOrModified() {
     if(btnCreer.value === 'Modifier') {
         deleteContact(focusElement, focusIndex);
 
@@ -92,15 +92,23 @@ btnRenit.addEventListener('click', formReset);
 
 // Mobile button listener
 const btnMobile = document.querySelector('#mobileBtn__formView');
-const arrowBack = document.querySelector('.arrow_back');
-const logoNewContact = document.querySelector('.logo__newContact');
-const spanNewContact = document.querySelector('.logo__newContact ~ span');
+const arrowBack = document.createElement('img');
+let appendImg = document.querySelector('.titleHeader');
+arrowBack.src = './img/arrow_back.svg';
+
 btnMobile.addEventListener('click', () => {
     form.style.display = 'block';
     listContact.style.display = 'none';
+    btnMobile.style.display = "none";
     arrowBack.style.display = 'block';
-    logoNewContact.style.display = 'none';
-    spanNewContact.style.display = 'none';
+    appendImg.insertAdjacentElement('afterbegin', arrowBack)
+})
+
+arrowBack.addEventListener('click', () => {
+    form.style.display = 'none';
+    listContact.style.display = 'block';
+    btnMobile.style.display = "block";
+    arrowBack.style.display = 'none';
 })
 
 // Tableau des contacts stocké dans le local storage
@@ -247,6 +255,9 @@ function addContact() {
         document.querySelector('.file img').remove();
     };
     document.querySelector('.file span').style.display = 'block';
+    form.classList.add('formContact-mobile');
+    btnMobile.classList = "block";
+    arrowBack.style.display = 'none';
 }
 
 // la fonction de confirmation de la suppression d'un contact
@@ -339,13 +350,14 @@ function completedContact(element, index) {
 function viewContacts() {
     divContactList.innerHTML = '';
     let pEmptyList = document.createElement('p');
+    pEmptyList.classList.add('p__emptyList')
     divContactList.appendChild(pEmptyList);
 
     if(contactList.length == 0) {
         form.classList.remove('formContact-mobile');
         listContact.classList.add('listContact-mobile')
-        pEmptyList.style.display = 'block';  
-        document.querySelector('#mobileBtn__formView').style.display = 'none';          
+        pEmptyList.innerText = 'La liste de contact est vide'; 
+        appendImg.insertAdjacentElement('afterbegin', arrowBack);          
     } else {
         pEmptyList.style.display = 'none';
         for(let i = 0; i < contactList.length; i++) {

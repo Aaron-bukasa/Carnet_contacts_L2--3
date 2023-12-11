@@ -22,7 +22,6 @@ body {
     font-weight: 500;
     line-height: 24px;
     height: 100vh;
-    position: relative;
 }
 #container {
     color: var(--colorDark);
@@ -69,6 +68,13 @@ textarea {
     flex-shrink: 1;
     flex-basis: 40rem;
     border: 1px solid var(--colorBorder01);
+}
+.titleHeader {
+    display: flex;
+    align-items: center;
+}
+.titleHeader img {
+    display: none;
 }
 .formContact h2 {
     text-align: center;
@@ -132,6 +138,7 @@ textarea {
     flex-shrink: 1;
     width: 76.4rem;
     border-bottom: none;
+    position: relative;
 }
 .listContact__content {
     height: 82vh;
@@ -356,9 +363,10 @@ textarea {
         align-items: center;
         column-gap: 10px;
         position: absolute;
-        right: 2.2rem;
+        right: 1.8rem;
         bottom: 2rem;
         padding: 0.8rem;
+        padding: 20px;
         background-color: #99d2fa;
         border-radius: 14px;
         cursor: pointer;
@@ -369,7 +377,8 @@ textarea {
     .listContact-mobile {
         display: none;
     }
-    .arrow_back {
-        display: none;
+    .titleHeader img {
+        display: block;
+        margin-right: 15px;
     }
 }
